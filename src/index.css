@@ -1,0 +1,74 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-clay-50 text-charcoal font-sans overflow-x-hidden;
+  }
+
+  ::selection {
+    @apply bg-brand text-white;
+  }
+
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-clay-100;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-brand rounded-full;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center gap-2 bg-brand text-white px-8 py-3.5 text-sm font-medium uppercase transition-all duration-300 hover:bg-brand-dark hover:shadow-lg hover:shadow-brand/30 active:scale-95;
+    letter-spacing: 0.15em;
+  }
+  .btn-outline {
+    @apply inline-flex items-center gap-2 border border-brand text-brand px-8 py-3.5 text-sm font-medium uppercase transition-all duration-300 hover:bg-brand hover:text-white active:scale-95;
+    letter-spacing: 0.15em;
+  }
+  .section-label {
+    @apply text-xs font-medium uppercase text-brand/70;
+    letter-spacing: 0.35em;
+  }
+  .section-heading {
+    @apply font-display text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight text-charcoal;
+  }
+  .section-subheading {
+    @apply font-display text-2xl md:text-3xl font-semibold text-charcoal;
+  }
+  .container-site {
+    @apply max-w-7xl mx-auto px-5 md:px-10 lg:px-16;
+  }
+  .card-product {
+    @apply relative bg-white overflow-hidden cursor-pointer transition-all duration-500 hover:shadow-2xl hover:shadow-charcoal/10;
+  }
+  .divider-brand {
+    @apply w-12 h-0.5 bg-brand;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .clip-diagonal {
+    clip-path: polygon(0 0, 100% 0, 100% 88%, 0 100%);
+  }
+  .clip-diagonal-reverse {
+    clip-path: polygon(0 12%, 100% 0, 100% 100%, 0 100%);
+  }
+  .tracking-ultra {
+    letter-spacing: 0.35em;
+  }
+}

@@ -69,19 +69,19 @@ export default function ContactPage() {
                   icon: MapPin,
                   label: "Factory Address",
                   value:
-                    "123 Industrial Area, Phase II,\nNew Delhi – 110020, India",
+                    "RZ - 59 Santosh Park, Uttam Nagar East Near Shiv Mandir, New Delhi, India - 110059 ",
                 },
                 {
                   icon: Phone,
                   label: "Phone",
-                  value: "+91 99999 99999",
+                  value: "+91 9582828397, 9315102828",
                   href: "tel:+919999999999",
                 },
                 {
                   icon: Mail,
                   label: "Email",
-                  value: "info@tandoorcraft.com",
-                  href: "mailto:info@tandoorcraft.com",
+                  value: "exporterspace@gmail.com",
+                  href: "exporterspace@gmail.comcom",
                 },
                 {
                   icon: Clock,

@@ -41,7 +41,7 @@ export default function Footer() {
         <div className="lg:col-span-1">
           <Link to="/" className="inline-block mb-4">
             <span className="font-display text-2xl font-bold text-white">
-              TandoorCraft
+              A-one Tandoor
             </span>
             <span className="block text-[9px] text-brand tracking-ultra uppercase mt-0.5">
               Since 2005
@@ -69,7 +69,7 @@ export default function Footer() {
               <Youtube size={16} />
             </a>
             <a
-              href="https://wa.me/919999999999"
+              href="https://wa.me/919315102828"
               aria-label="WhatsApp"
               className="p-2 border border-white/20 text-white/50 hover:border-brand hover:text-brand transition-colors"
             >
@@ -149,7 +149,7 @@ export default function Footer() {
                 className="flex items-center gap-3 text-sm text-white/60 hover:text-brand transition-colors"
               >
                 <Mail size={15} className="text-brand shrink-0" />
-                info@tandoorcraft.com
+                exporterspace@gmail.com"
               </a>
             </li>
           </ul>
@@ -160,7 +160,7 @@ export default function Footer() {
       <div className="border-t border-white/10">
         <div className="container-site py-5 flex flex-col md:flex-row items-center justify-between gap-3">
           <p className="text-xs text-white/30">
-            © {new Date().getFullYear()} TandoorCraft. All rights reserved.
+            © {new Date().getFullYear()} A-one Tandoor. All rights reserved.
           </p>
           <p className="text-xs text-white/30">
             Designed & Built with precision in India 🇮🇳

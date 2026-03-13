@@ -151,7 +151,7 @@ export default function Navbar() {
                 isVisible ? "text-charcoal" : "text-white",
               )}
             >
-              TandoorCraft
+              A-One Tandoor
             </span>
             <span
               className={cn(
@@ -159,7 +159,7 @@ export default function Navbar() {
                 isVisible ? "text-brand" : "text-white/70",
               )}
             >
-              Since 1987
+              Since 2005
             </span>
           </Link>
 

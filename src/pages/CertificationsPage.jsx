@@ -1,113 +1,229 @@
-import { useState, useEffect } from "react";
-import { sanityClient, QUERIES } from "../lib/sanity";
+// src/pages/CertificationsPage.jsx
+import { useRef } from "react";
 import { motion } from "framer-motion";
 import FadeIn from "../components/ui/FadeIn";
 import RevealText from "../components/ui/RevealText";
-import { Award } from "lucide-react";
+
+const certifications = [
+  {
+    id: "nsf",
+    label: "Food Safety",
+    title: "NSF Certified",
+    issuer: "NSF International",
+    year: "2018",
+    validity: "Annual Renewal",
+    description:
+      "Our tandoors meet NSF International's strict standards for food equipment safety, ensuring every unit is safe for commercial kitchen environments worldwide.",
+  },
+  {
+    id: "iso",
+    label: "Quality Management",
+    title: "ISO 9001:2015",
+    issuer: "Bureau Veritas",
+    year: "2016",
+    validity: "3-Year Cycle",
+    description:
+      "ISO 9001 certification confirms our end-to-end quality management system — from raw material sourcing to final dispatch — is consistently maintained.",
+  },
+  {
+    id: "bis",
+    label: "Indian Standard",
+    title: "BIS Approved",
+    issuer: "Bureau of Indian Standards",
+    year: "2014",
+    validity: "5-Year Cycle",
+    description:
+      "BIS approval certifies compliance with Indian manufacturing standards, reinforcing our commitment to safety and quality for domestic and export markets.",
+  },
+  {
+    id: "export",
+    label: "Export Compliance",
+    title: "Export House Certificate",
+    issuer: "DGFT — Govt. of India",
+    year: "2010",
+    validity: "5-Year Cycle",
+    description:
+      "Recognised as a certified export house by the Directorate General of Foreign Trade, enabling us to serve international clients with full compliance.",
+  },
+];
 
 export default function CertificationsPage() {
-  const [certs, setCerts] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    sanityClient
-      .fetch(QUERIES.certifications)
-      .then(setCerts)
-      .catch(console.error)
-      .finally(() => setLoading(false));
-  }, []);
-
   return (
-    <main className="pt-24 pb-24 min-h-screen bg-clay-50">
-      {/* Header */}
-      <div className="bg-charcoal py-20 md:py-28 mb-16">
-        <div className="container-site">
+    <main className="bg-clay-50 min-h-screen">
+      {/* ── Hero ── */}
+      <section className="bg-charcoal pt-36 pb-24 overflow-hidden relative">
+        {/* Background number watermark */}
+        <span className="absolute right-10 top-1/2 -translate-y-1/2 font-display text-[220px] font-semibold text-white/[0.03] leading-none select-none pointer-events-none">
+          CERT
+        </span>
+
+        <div className="container-site relative z-10">
           <FadeIn>
-            <p className="section-label text-white/40 mb-3">
-              Quality Assurance
-            </p>
+            <div className="flex items-center gap-3 mb-8">
+              <div className="w-5 h-px bg-brand" />
+              <p className="section-label text-brand/60">Verified Standards</p>
+            </div>
           </FadeIn>
           <RevealText>
-            <h1 className="section-heading text-white">
-              Our <em className="text-brand not-italic">Certifications</em>
+            <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-semibold text-white leading-[1.05] max-w-3xl">
+              Certifications
+              <br />
+              <span className="text-brand">& Compliance</span>
             </h1>
           </RevealText>
           <FadeIn delay={0.3}>
-            <p className="mt-5 text-white/50 max-w-xl leading-relaxed">
-              Every TandoorCraft product meets rigorous international safety,
-              quality, and manufacturing standards verified by leading
-              certification bodies.
+            <p className="mt-8 text-[13.5px] text-white/40 leading-[1.95] max-w-md">
+              Every A-One Tandoor product is backed by internationally
+              recognised certifications — earned through decades of consistent
+              manufacturing standards, not paperwork.
             </p>
           </FadeIn>
         </div>
-      </div>
+      </section>
 
-      <div className="container-site">
-        {loading ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {Array.from({ length: 6 }).map((_, i) => (
-              <div key={i} className="aspect-[4/3] bg-clay-200 animate-pulse" />
+      {/* ── Certification Cards ── */}
+      <section className="py-24">
+        <div className="container-site">
+          {/* Intro row */}
+          <FadeIn>
+            <div className="flex items-end justify-between mb-16 pb-8 border-b border-clay-200">
+              <div>
+                <p className="text-[10px] uppercase tracking-ultra text-charcoal/30 mb-3">
+                  All Documents
+                </p>
+                <p className="font-display text-2xl font-semibold text-charcoal">
+                  {certifications.length} Active Certifications
+                </p>
+              </div>
+              <p className="hidden md:block text-xs text-charcoal/35 max-w-xs text-right leading-relaxed">
+                Certificates are available for download below. For verification,
+                contact our compliance team directly.
+              </p>
+            </div>
+          </FadeIn>
+
+          {/* Cards */}
+          <div className="flex flex-col gap-px bg-clay-200">
+            {certifications.map((cert, i) => (
+              <CertCard key={cert.id} cert={cert} index={i} />
             ))}
           </div>
-        ) : certs.length === 0 ? (
-          <div className="text-center py-24 text-charcoal-soft">
-            <Award size={48} className="mx-auto mb-4 text-clay-300" />
-            <p className="font-display text-2xl">Certifications coming soon.</p>
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {certs.map((cert, i) => (
-              <motion.div
-                key={cert._id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.07, duration: 0.6 }}
-                className="group bg-white border border-clay-200 hover:border-brand/30 hover:shadow-xl hover:shadow-brand/5 transition-all duration-500 overflow-hidden"
-              >
-                {/* Certificate Preview */}
-                <div className="aspect-[4/3] bg-clay-100 overflow-hidden">
-                  {cert.image ? (
-                    <img
-                      src={cert.image}
-                      alt={cert.name}
-                      loading="lazy"
-                      className="w-full h-full object-contain p-6 transition-transform duration-500 group-hover:scale-105"
-                    />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center">
-                      <Award size={56} className="text-clay-300" />
-                    </div>
-                  )}
-                </div>
+        </div>
+      </section>
 
-                {/* Info */}
-                <div className="p-6 border-t border-clay-200 group-hover:border-brand/20 transition-colors">
-                  <div className="divider-brand mb-4" />
-                  <h3 className="font-display text-xl text-charcoal group-hover:text-brand transition-colors">
-                    {cert.name}
-                  </h3>
-                  {cert.issuingBody && (
-                    <p className="text-sm text-charcoal-soft mt-1">
-                      {cert.issuingBody}
-                    </p>
-                  )}
-                  {cert.year && (
-                    <p className="text-xs text-charcoal-soft/60 mt-1">
-                      {cert.year}
-                    </p>
-                  )}
-                  {cert.description && (
-                    <p className="text-sm text-charcoal-soft mt-3 leading-relaxed">
-                      {cert.description}
-                    </p>
-                  )}
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        )}
-      </div>
+      {/* ── Compliance Note ── */}
+      <section className="py-20 border-t border-clay-200">
+        <div className="container-site">
+          <FadeIn>
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-10 items-start">
+              <div className="md:col-span-5">
+                <p className="text-[10px] uppercase tracking-ultra text-charcoal/30 mb-4">
+                  Need Verification?
+                </p>
+                <h3 className="font-display text-3xl font-semibold text-charcoal leading-tight mb-4">
+                  Request official
+                  <br />
+                  <span className="text-brand">certified copies.</span>
+                </h3>
+                <div className="divider-brand mt-6" />
+              </div>
+              <div className="md:col-span-7 md:pt-10">
+                <p className="text-[13.5px] text-charcoal/55 leading-[1.95] mb-6 max-w-lg">
+                  For importers, distributors, or institutional buyers requiring
+                  hard copies or notarised certification documents for customs
+                  or procurement, our team can provide these upon request.
+                </p>
+                <a href="/contact" className="btn-primary">
+                  Contact Compliance Team
+                </a>
+              </div>
+            </div>
+          </FadeIn>
+        </div>
+      </section>
     </main>
+  );
+}
+
+/* ── Individual Cert Card ── */
+function CertCard({ cert, index }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{ delay: index * 0.08, duration: 0.5, ease: "easeOut" }}
+      className="bg-clay-50 group hover:bg-white transition-colors duration-300"
+    >
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-0">
+        {/* Left — index + label */}
+        <div className="md:col-span-2 px-8 py-8 flex flex-row md:flex-col justify-between md:justify-start gap-2 border-b md:border-b-0 md:border-r border-clay-200">
+          <span className="font-display text-[11px] text-charcoal/20 font-semibold">
+            {String(index + 1).padStart(2, "0")}
+          </span>
+          <span className="text-[10px] uppercase tracking-ultra text-brand/60 md:mt-auto">
+            {cert.label}
+          </span>
+        </div>
+
+        {/* Center — main info */}
+        <div className="md:col-span-7 px-8 py-8 md:border-r border-clay-200">
+          <h3 className="font-display text-xl font-semibold text-charcoal mb-1 group-hover:text-brand transition-colors duration-300">
+            {cert.title}
+          </h3>
+          <div className="flex items-center gap-4 mb-5">
+            <span className="text-[11px] text-charcoal/40">{cert.issuer}</span>
+            <span className="text-[10px] uppercase tracking-ultra text-charcoal/20">
+              Since {cert.year}
+            </span>
+            <span className="text-[10px] uppercase tracking-ultra text-charcoal/20">
+              {cert.validity}
+            </span>
+          </div>
+          <p className="text-[13px] text-charcoal/50 leading-[1.85] max-w-lg">
+            {cert.description}
+          </p>
+        </div>
+
+        {/* Right — PDF placeholder */}
+        <div className="md:col-span-3 px-8 py-8 flex flex-col items-start md:items-center justify-center gap-4">
+          {/* ─────────────────────────────────────────
+              PDF PLACEHOLDER — Replace href="#" with
+              your actual PDF path or URL when ready.
+              e.g. href="/certs/nsf-certificate.pdf"
+          ───────────────────────────────────────── */}
+          <a
+            href="#" // ← REPLACE WITH PDF PATH
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full md:w-auto flex flex-col items-center justify-center gap-3 border border-dashed border-clay-300 hover:border-brand group/pdf transition-colors duration-300 px-6 py-8"
+          >
+            {/* PDF Icon */}
+            <svg
+              className="w-7 h-7 text-charcoal/20 group-hover/pdf:text-brand transition-colors duration-300"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={1.5}
+                d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"
+              />
+            </svg>
+            <div className="text-center">
+              <p className="text-[11px] font-semibold text-charcoal/40 group-hover/pdf:text-brand transition-colors duration-300">
+                View Certificate
+              </p>
+              <p className="text-[10px] uppercase tracking-ultra text-charcoal/25 mt-0.5">
+                PDF Document
+              </p>
+            </div>
+          </a>
+          {/* ─── END PDF PLACEHOLDER ─── */}
+        </div>
+      </div>
+    </motion.div>
   );
 }

@@ -8,6 +8,8 @@ import NewArrivalsSection from "../components/home/NewArrivalsSection";
 import ProductShowcaseSlider from "../components/home/ProductShowcaseSlider";
 import ContactCTASection from "../components/home/ContactCTASection";
 import FeaturedProductsSection from "../components/home/FeaturedProductsSection";
+import GlobalExportSection from "../components/home/GlobalExportSection";
+import BrandsSection from "../components/home/BrandsSection";
 
 // export default function HomePage() {
 //   return (
@@ -32,6 +34,8 @@ export default function HomePage() {
       <BrandIntroSection />
       <CategoriesSection />
       <FeaturedProductsSection />
+      {/* <GlobalExportSection /> */}
+      {/* <BrandsSection /> */}
       <WhyChooseSection />
       {/* <PopularProductsSection /> */}
       <CulinaryInspirationSection />

@@ -6,22 +6,22 @@ import { Link } from "react-router-dom";
 
 const MILESTONES = [
   {
-    year: "1987",
+    year: "2005",
     title: "Founded in New Delhi",
     desc: "Started as a small workshop crafting tandoors by hand for local restaurants.",
   },
   {
-    year: "1998",
+    year: "2010",
     title: "First International Export",
     desc: "Expanded to the UK and UAE market, marking the beginning of our global journey.",
   },
   {
-    year: "2005",
+    year: "2010",
     title: "ISO 9001 Certification",
     desc: "Received ISO quality certification, validating our manufacturing standards.",
   },
   {
-    year: "2012",
+    year: "2016",
     title: "NSF International Certification",
     desc: "Our premium range became NSF certified, opening doors to the US market.",
   },
@@ -38,7 +38,7 @@ const MILESTONES = [
 ];
 
 const STATS = [
-  ["35+", "Years in Business"],
+  ["20+", "Years in Business"],
   ["30+", "Countries Served"],
   ["10,000+", "Happy Clients"],
   ["50+", "Product Models"],

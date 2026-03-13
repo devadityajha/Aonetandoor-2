@@ -8,8 +8,8 @@ const categories = [
   { label: "Premium Tandoors", href: "/products/premium-tandoors" },
   { label: "Accessories", href: "/products/accessories" },
   { label: "Wood Fire Brick Ovens", href: "/products/wood-fire-brick-ovens" },
-  { label: "Clay Utensils", href: "/products/utensils-clay" },
-  { label: "Copper Utensils", href: "/products/utensils-copper" },
+  { label: "Clay Utensils", href: "/products/clay-tandoors" },
+  { label: "Copper Utensils", href: "/products/copper-tandoors" },
 ];
 
 export default function Footer() {
@@ -44,12 +44,14 @@ export default function Footer() {
               TandoorCraft
             </span>
             <span className="block text-[9px] text-brand tracking-ultra uppercase mt-0.5">
-              Since 1987
+              Since 2005
             </span>
           </Link>
           <p className="text-sm text-white/50 leading-relaxed mt-4 max-w-xs">
-            Crafting the world's finest tandoors for homes, restaurants, and
-            professional kitchens across India and internationally.
+            Aone Tandoor is your one-stop shop for premium commercial kitchen
+            equipment. From traditional clay pot tandoors to modern electric
+            models, we offer a wide range of products designed to elevate your
+            culinary experience.
           </p>
           <div className="flex items-center gap-4 mt-6">
             <a
@@ -127,18 +129,18 @@ export default function Footer() {
             <li className="flex items-start gap-3">
               <MapPin size={15} className="text-brand mt-0.5 shrink-0" />
               <span className="text-sm text-white/60 leading-relaxed">
-                123 Industrial Area, Phase II,
+                RZ - 59 Santosh Park, Uttam Nagar East Near Shiv Mandir,
                 <br />
-                New Delhi – 110020, India
+                New Delhi - 110059 India
               </span>
             </li>
             <li>
               <a
-                href="tel:+919999999999"
+                href="tel:+91 9582828397, +91 9315102828"
                 className="flex items-center gap-3 text-sm text-white/60 hover:text-brand transition-colors"
               >
                 <Phone size={15} className="text-brand shrink-0" />
-                +91 99999 99999
+                +91 9582828397 <br /> +91 9315102828
               </a>
             </li>
             <li>

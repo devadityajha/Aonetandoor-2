@@ -91,6 +91,7 @@ export default {
           dark: "#D9C9BC",
         },
       },
+
       fontFamily: {
         display: ['"Playfair Display"', "Georgia", "serif"],
         sans: ['"Inter"', "system-ui", "sans-serif"],

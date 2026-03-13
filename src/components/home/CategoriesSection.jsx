@@ -32,7 +32,7 @@ const CATEGORIES = [
   },
   {
     label: "Copper Tandoor",
-    slug: "utensils-clay",
+    slug: "copper-tandoors",
     desc: "Traditional clay and copper cookware to complete your cooking experience.",
   },
 ];

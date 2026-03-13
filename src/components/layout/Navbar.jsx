@@ -21,8 +21,8 @@ const NAV_LINKS = [
       {
         label: "Utensils",
         sub: [
-          { label: "Clay Utensils", href: "/products/utensils-clay" },
-          { label: "Copper Utensils", href: "/products/utensils-copper" },
+          { label: "Clay Utensils", href: "/products/clay-tandoors" },
+          { label: "Copper Utensils", href: "/products/copper-tandoors" },
         ],
       },
     ],

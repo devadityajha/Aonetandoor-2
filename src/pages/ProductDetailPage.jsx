@@ -93,32 +93,67 @@ export default function ProductDetailPage() {
   const indicatorRef = useRef(null);
   const [related, setRelated] = useState([]);
 
+  // useEffect(() => {
+  //   sanityClient
+  //     .fetch(QUERIES.productDetail(slug))
+  //     .then((data) => {
+  //       setProduct(data);
+
+  //       // fetch related products after product loads
+  //       if (data?.categorySlug) {
+  //         sanityClient
+  //           .fetch(QUERIES.relatedProducts(data.categorySlug, slug))
+  //           .then((rel) =>
+  //             setRelated(
+  //               rel.map((p) => ({
+  //                 ...p,
+  //                 image: p.image ? urlFor(p.image).width(600).url() : null,
+  //               })),
+  //             ),
+  //           )
+  //           .catch(console.error);
+  //       }
+  //     })
+  //     .catch(console.error)
+  //     .finally(() => setLoading(false));
+  // }, [slug]);
+
+  // Slide indicator
+
+  // Add this state
+  const [error, setError] = useState(false);
+
+  // Replace your existing useEffect fetch
   useEffect(() => {
+    setLoading(true);
+    setError(false);
+
     sanityClient
       .fetch(QUERIES.productDetail(slug))
       .then((data) => {
-        setProduct(data);
-
-        // fetch related products after product loads
-        if (data?.categorySlug) {
-          sanityClient
-            .fetch(QUERIES.relatedProducts(data.categorySlug, slug))
-            .then((rel) =>
-              setRelated(
-                rel.map((p) => ({
-                  ...p,
-                  image: p.image ? urlFor(p.image).width(600).url() : null,
-                })),
-              ),
-            )
-            .catch(console.error);
+        if (!data) {
+          setError(true); // ← catches null response
+        } else {
+          setProduct(data);
+          if (data?.categorySlug) {
+            sanityClient
+              .fetch(QUERIES.relatedProducts(data.categorySlug, slug))
+              .then((rel) =>
+                setRelated(
+                  rel.map((p) => ({
+                    ...p,
+                    image: p.image ? urlFor(p.image).width(600).url() : null,
+                  })),
+                ),
+              )
+              .catch(console.error);
+          }
         }
       })
-      .catch(console.error)
+      .catch(() => setError(true)) // ← catches network errors
       .finally(() => setLoading(false));
   }, [slug]);
 
-  // Slide indicator
   useEffect(() => {
     const el = tabRefs.current[activeTab];
     const bar = indicatorRef.current;
@@ -247,7 +282,7 @@ export default function ProductDetailPage() {
                   )}
                 </button>
                 <a
-                  href="https://wa.me/919999999999"
+                  href="https://wa.me/9315102828"
                   target="_blank"
                   rel="noreferrer"
                   className="flex items-center gap-2 px-5 py-3 bg-[#25D366] text-white text-xs font-medium uppercase hover:bg-[#1ebe59] transition-colors"
@@ -432,33 +467,6 @@ export default function ProductDetailPage() {
           </div>
         </div>
       </div>
-
-      {/* ── RELATED / CTA BAND ─────────────────────── */}
-      {/* <div className="bg-charcoal py-16">
-        <div className="container-site flex flex-col md:flex-row items-center justify-between gap-8">
-          <div>
-            <p className="section-label text-white/40 mb-2">Interested?</p>
-            <h3 className="font-display text-2xl md:text-3xl text-white">
-              Get a personalised quote for{" "}
-              <em className="text-brand not-italic">{product.name}</em>
-            </h3>
-          </div>
-          <div className="flex flex-wrap gap-4 shrink-0">
-            <a
-              href="https://wa.me/919999999999"
-              target="_blank"
-              rel="noreferrer"
-              className="flex items-center gap-2 px-6 py-3.5 bg-[#25D366] text-white text-xs font-medium uppercase hover:bg-[#1ebe59] transition-colors"
-              style={{ letterSpacing: "0.12em" }}
-            >
-              <FaWhatsapp size={18} /> WhatsApp Us
-            </a>
-            <Link to="/contact" className="btn-primary">
-              Request a Quote
-            </Link>
-          </div>
-        </div>
-      </div> */}
 
       {/* ── RELATED PRODUCTS ───────────────────────── */}
       {related.length > 0 && (

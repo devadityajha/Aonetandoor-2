@@ -149,7 +149,7 @@ export default function Footer() {
                 className="flex items-center gap-3 text-sm text-white/60 hover:text-brand transition-colors"
               >
                 <Mail size={15} className="text-brand shrink-0" />
-                exporterspace@gmail.com"
+                exportersace@gmail.com"
               </a>
             </li>
           </ul>

@@ -80,8 +80,8 @@ export default function ContactPage() {
                 {
                   icon: Mail,
                   label: "Email",
-                  value: "exporterspace@gmail.com",
-                  href: "exporterspace@gmail.comcom",
+                  value: "exportersace@gmail.com",
+                  href: "exportersace@gmail.com",
                 },
                 {
                   icon: Clock,

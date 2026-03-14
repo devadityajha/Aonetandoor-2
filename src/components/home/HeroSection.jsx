@@ -56,7 +56,7 @@ export default function HeroSection() {
           >
             <div className="w-8 h-px bg-brand" />
             <span className="section-label text-white/60">
-              Crafted Since 1987
+              Crafted Since 2005
             </span>
           </motion.div>
 

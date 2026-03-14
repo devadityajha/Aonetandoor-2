@@ -6,44 +6,27 @@ import RevealText from "../components/ui/RevealText";
 
 const certifications = [
   {
-    id: "nsf",
-    label: "Food Safety",
-    title: "NSF Certified",
-    issuer: "NSF International",
-    year: "2018",
-    validity: "Annual Renewal",
+    id: "ce",
+    label: "EU Compliance",
+    title: "CE Certification",
+    issuer: "U.S. Certification (IABCERT Accredited)",
+    year: "2025",
+    validity: "Valid until Apr 2028",
     description:
-      "Our tandoors meet NSF International's strict standards for food equipment safety, ensuring every unit is safe for commercial kitchen environments worldwide.",
+      "Our electric tandoors and commercial kitchen equipment comply with EU Low Voltage Directive 2014/35/EU. Certificate No. US-AEEX-25-11255721, issued April 2025.",
+    pdf: "/Certificate-1.pdf", // ← your PDF path
   },
-  {
-    id: "iso",
-    label: "Quality Management",
-    title: "ISO 9001:2015",
-    issuer: "Bureau Veritas",
-    year: "2016",
-    validity: "3-Year Cycle",
-    description:
-      "ISO 9001 certification confirms our end-to-end quality management system — from raw material sourcing to final dispatch — is consistently maintained.",
-  },
-  {
-    id: "bis",
-    label: "Indian Standard",
-    title: "BIS Approved",
-    issuer: "Bureau of Indian Standards",
-    year: "2014",
-    validity: "5-Year Cycle",
-    description:
-      "BIS approval certifies compliance with Indian manufacturing standards, reinforcing our commitment to safety and quality for domestic and export markets.",
-  },
+
   {
     id: "export",
     label: "Export Compliance",
-    title: "Export House Certificate",
+    title: "Importer-Exporter Code (IEC)",
     issuer: "DGFT — Govt. of India",
-    year: "2010",
-    validity: "5-Year Cycle",
+    year: "2024",
+    validity: "Permanent",
     description:
-      "Recognised as a certified export house by the Directorate General of Foreign Trade, enabling us to serve international clients with full compliance.",
+      "ACE Exporters holds IEC code GEAPP2265A issued by the Directorate General of Foreign Trade, certifying our authorization to import and export commercially across international markets.",
+    pdf: "/Certificate-2.pdf",
   },
 ];
 
@@ -193,7 +176,7 @@ function CertCard({ cert, index }) {
               e.g. href="/certs/nsf-certificate.pdf"
           ───────────────────────────────────────── */}
           <a
-            href="#" // ← REPLACE WITH PDF PATH
+            href={cert.pdf || "#"} // ← REPLACE WITH PDF PATH
             target="_blank"
             rel="noopener noreferrer"
             className="w-full md:w-auto flex flex-col items-center justify-center gap-3 border border-dashed border-clay-300 hover:border-brand group/pdf transition-colors duration-300 px-6 py-8"

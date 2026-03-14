@@ -118,7 +118,7 @@ export default function ContactPage() {
               {/* WhatsApp */}
               <FadeIn delay={0.5}>
                 <a
-                  href="https://wa.me/919999999999"
+                  href="https://wa.me/9315102828"
                   target="_blank"
                   rel="noreferrer"
                   className="inline-flex items-center gap-3 bg-[#25D366] text-white px-6 py-3 text-sm font-medium hover:bg-[#1ebe59] transition-colors"

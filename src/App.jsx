@@ -10,6 +10,7 @@ import ProductDetailPage from "./pages/ProductDetailPage";
 import CertificationsPage from "./pages/CertificationsPage";
 import ContactPage from "./pages/ContactPage";
 import PageTransition from "./components/ui/PageTransition";
+import ScrollToTop from "./components/ScrollToTop";
 
 export default function App() {
   useLenis();
@@ -17,6 +18,7 @@ export default function App() {
 
   return (
     <>
+      <ScrollToTop />
       <Navbar />
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>

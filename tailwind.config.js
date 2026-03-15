@@ -51,9 +51,7 @@
 //     },
 //   },
 //   plugins: [],
-// };
-
-/** @type {import('tailwindcss').Config} */
+// };/** @type {import('tailwindcss').Config} */
 export default {
   content: ["./index.html", "./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
@@ -64,7 +62,6 @@ export default {
           light: "#B06060",
           dark: "#6B3232",
           muted: "#C47A7A",
-          // ✅ charcoal wale hata diye yahan se
         },
         clay: {
           50: "#FAF6F3",
@@ -79,19 +76,17 @@ export default {
           900: "#201410",
         },
         charcoal: {
-          DEFAULT: "#1A1614", // mere "#1a1a1a" se better — warm dark
-          light: "#2C2420", // mere "#2a2a2a" se better — warm tone
+          DEFAULT: "#1A1614",
+          light: "#2C2420",
           mid: "#3D3330",
           soft: "#5C5250",
         },
-
         beige: {
           DEFAULT: "#F5EDE6",
           warm: "#EDE0D4",
           dark: "#D9C9BC",
         },
       },
-
       fontFamily: {
         display: ['"Playfair Display"', "Georgia", "serif"],
         sans: ['"Inter"', "system-ui", "sans-serif"],
@@ -103,6 +98,18 @@ export default {
         "gradient-brand": "linear-gradient(135deg, #944E4E 0%, #6B3232 100%)",
         "gradient-warm": "linear-gradient(180deg, #FAF6F3 0%, #F2EAE4 100%)",
         "gradient-dark": "linear-gradient(180deg, #1A1614 0%, #2C2420 100%)",
+      },
+      animation: {
+        // We renamed this to 'marquee' to match your JSX
+        // 40s is a slow, premium speed.
+        marquee: "marquee 40s linear infinite",
+      },
+      keyframes: {
+        marquee: {
+          "0%": { transform: "translateX(0%)" },
+          // -50% because we are using 2 sets of logos in the array
+          "100%": { transform: "translateX(-50%)" },
+        },
       },
     },
   },

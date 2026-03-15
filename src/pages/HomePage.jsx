@@ -35,7 +35,7 @@ export default function HomePage() {
       <CategoriesSection />
       <FeaturedProductsSection />
       <GlobalExportSection />
-      {/* <BrandsSection /> */}
+      <BrandsSection />
       <WhyChooseSection />
       {/* <PopularProductsSection /> */}
       <CulinaryInspirationSection />

@@ -1,87 +1,105 @@
-// src/components/home/BrandsSection.jsx
+import React from "react";
+import { motion } from "framer-motion";
 
-const brands = [
-  { name: "ITC Hotels", category: "Hospitality" },
-  { name: "Taj Hotels", category: "Hospitality" },
-  { name: "Oberoi Group", category: "Hospitality" },
-  { name: "Marriott", category: "Hotel Chain" },
-  { name: "Hyatt", category: "Hotel Chain" },
-  { name: "Barbeque Nation", category: "Restaurant Chain" },
-  { name: "Haldiram's", category: "Food Brand" },
-  { name: "Punjabi Grill", category: "Restaurant" },
-  { name: "Bukhara", category: "Fine Dining" },
-  { name: "Moti Mahal", category: "Restaurant" },
-  { name: "Zomato Kitchens", category: "Cloud Kitchen" },
-  { name: "Swiggy Eats", category: "Cloud Kitchen" },
+const BRANDS = [
+  { name: "Haldiram", logo: "/Haldiram's_Logo_SVG.svg" },
+  { name: "Hira Sweets", logo: "/Hira.png" },
+  { name: "Bikano", logo: "/Bikano.png" },
+  { name: "Daryaganj", logo: "/daryaganj.png" },
+  { name: "Hyatt Regency", logo: "/hyatt.jpg" },
+  { name: "Sighri", logo: "/sighri.jpeg" },
+  { name: "Radisson Blu", logo: "/raddision.png" },
+  { name: "The Lalit", logo: "/lalit.png" },
 ];
 
-// Duplicate for seamless loop
-const marqueeItems = [...brands, ...brands];
-
-export default function BrandsSection() {
+const BrandLogo = ({ brand, index }) => {
   return (
-    <section className="bg-clay-50 py-24 overflow-hidden">
-      <div className="container-site mb-14">
-        <div className="reveal-item flex flex-col md:flex-row md:items-end md:justify-between gap-4">
-          <div>
-            <p className="section-label mb-3">Trusted Partners</p>
-            <h2 className="section-heading max-w-xl">
-              Brands We've <br />
-              <span className="text-brand">Worked With</span>
-            </h2>
-          </div>
-          <p className="text-charcoal/50 text-sm max-w-xs leading-relaxed md:text-right">
-            From heritage hotel chains to modern cloud kitchens — our tandoors
-            power kitchens that demand nothing but the best.
+    <motion.div
+      animate={{ y: [0, -6, 0] }}
+      transition={{
+        duration: 5,
+        repeat: Infinity,
+        delay: index * 0.4,
+        ease: "easeInOut",
+      }}
+      className="flex flex-col items-center justify-center px-10 md:px-16 group cursor-pointer"
+    >
+      <div className="relative h-16 md:h-20 w-32 md:w-44 flex items-center justify-center">
+        {/* LOGO IMAGE - Removed the dark background plates since we are on a light theme now */}
+        <img
+          src={brand.logo}
+          alt={`${brand.name} logo`}
+          className="
+            relative z-10
+            h-full w-full object-contain 
+            opacity-90 
+            group-hover:opacity-100 
+            group-hover:scale-110
+            transition-all duration-500 ease-in-out
+          "
+        />
+      </div>
+
+      {/* TEXT: Changed opacity and color to be visible on light background */}
+      <span className="mt-4 text-[10px] uppercase tracking-ultra text-charcoal opacity-40 group-hover:opacity-100 transition-opacity duration-500 font-bold whitespace-nowrap">
+        {brand.name}
+      </span>
+    </motion.div>
+  );
+};
+
+const BrandsSection = () => {
+  const brandsList = [...BRANDS, ...BRANDS];
+
+  return (
+    <section className="py-24 bg-[#FAF9F6] overflow-hidden relative border-y border-clay-100">
+      <div className="container-site mb-16 text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="flex items-center justify-center gap-3 mb-4"
+        >
+          <div className="w-4 h-px bg-brand" />
+          <p className="text-brand uppercase tracking-ultra text-[10px] font-bold">
+            Established Partnerships
           </p>
-        </div>
-        <div className="divider-brand mt-6" />
+          <div className="w-4 h-px bg-brand" />
+        </motion.div>
+
+        <motion.h2
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.1 }}
+          /* FIX: Changed text-white to text-charcoal so it is visible */
+          className="text-charcoal text-3xl md:text-5xl font-display tracking-tight"
+        >
+          Powering the world’s <br />
+          <span className="text-brand italic font-serif text-4xl md:text-6xl">
+            finest
+          </span>{" "}
+          kitchens.
+        </motion.h2>
       </div>
 
-      {/* Marquee Row 1 — Left to Right */}
-      <div className="relative mb-4">
-        {/* Fade edges */}
-        <div className="absolute left-0 top-0 h-full w-32 bg-gradient-to-r from-clay-50 to-transparent z-10 pointer-events-none" />
-        <div className="absolute right-0 top-0 h-full w-32 bg-gradient-to-l from-clay-50 to-transparent z-10 pointer-events-none" />
+      {/* Marquee Container */}
+      <div className="relative flex overflow-hidden group">
+        {/* DARK EDGES REMOVED: Deleted the gradient divs that were here */}
 
-        <div className="flex animate-marquee-left gap-4 w-max">
-          {marqueeItems.map((brand, i) => (
-            <BrandCard key={i} brand={brand} />
+        <div className="flex w-max flex-nowrap animate-marquee-infinite group-hover:[animation-play-state:paused] py-4">
+          {brandsList.map((brand, idx) => (
+            <BrandLogo key={idx} brand={brand} index={idx} />
           ))}
         </div>
       </div>
 
-      {/* Marquee Row 2 — Right to Left */}
-      <div className="relative">
-        <div className="absolute left-0 top-0 h-full w-32 bg-gradient-to-r from-clay-50 to-transparent z-10 pointer-events-none" />
-        <div className="absolute right-0 top-0 h-full w-32 bg-gradient-to-l from-clay-50 to-transparent z-10 pointer-events-none" />
-
-        <div className="flex animate-marquee-right gap-4 w-max">
-          {[...marqueeItems].reverse().map((brand, i) => (
-            <BrandCard key={i} brand={brand} />
-          ))}
-        </div>
-      </div>
-
-      {/* Bottom note */}
-      <div className="container-site mt-14">
-        <p className="reveal-item text-center text-xs uppercase tracking-ultra text-charcoal/30">
-          Trusted by 200+ establishments across India & abroad
-        </p>
+      {/* Aesthetic Vertical Accent */}
+      <div className="mt-20 flex justify-center opacity-20">
+        <div className="w-px h-16 bg-gradient-to-b from-brand to-transparent" />
       </div>
     </section>
   );
-}
+};
 
-function BrandCard({ brand }) {
-  return (
-    <div className="flex-shrink-0 group border border-charcoal/8 bg-white hover:border-brand/40 hover:shadow-lg hover:shadow-brand/5 transition-all duration-300 px-10 py-6 flex flex-col items-center justify-center gap-1 min-w-[180px]">
-      <span className="font-display text-base font-semibold text-charcoal/70 group-hover:text-charcoal transition-colors duration-300 whitespace-nowrap">
-        {brand.name}
-      </span>
-      <span className="text-[10px] uppercase tracking-ultra text-brand/50 group-hover:text-brand/80 transition-colors duration-300">
-        {brand.category}
-      </span>
-    </div>
-  );
-}
+export default BrandsSection;

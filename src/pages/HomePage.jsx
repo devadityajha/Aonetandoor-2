@@ -10,38 +10,29 @@ import ContactCTASection from "../components/home/ContactCTASection";
 import FeaturedProductsSection from "../components/home/FeaturedProductsSection";
 import GlobalExportSection from "../components/home/GlobalExportSection";
 import BrandsSection from "../components/home/BrandsSection";
+import IndustriesSection from "../components/home/IndustriesSection";
+import InstagramFeedSection from "../components/home/InstagramFeedSection";
 
-// export default function HomePage() {
-//   return (
-//     <main>
-//       <HeroSection />
-//       <BrandIntroSection />
-//       <CategoriesSection />
-//       <WhyChooseSection />
-//       <FeaturedProductsSection />
-//       {/* <PopularProductsSection /> */}
-//       <CulinaryInspirationSection />
-//       {/* <NewArrivalsSection /> */}
-//       <ProductShowcaseSlider />
-//       <ContactCTASection />
-//     </main>
-//   );
-// }
 export default function HomePage() {
   return (
     <main>
       <HeroSection />
-      <BrandIntroSection />
       <CategoriesSection />
       <FeaturedProductsSection />
+      <WhyChooseSection />
+      <IndustriesSection />
       <GlobalExportSection />
       <BrandsSection />
-      <WhyChooseSection />
+      <InstagramFeedSection />
+
       {/* <PopularProductsSection /> */}
-      <CulinaryInspirationSection />
+      {/* <CulinaryInspirationSection /> */}
       {/* <NewArrivalsSection /> */}
-      <ProductShowcaseSlider />
+      {/* <ProductShowcaseSlider /> */}
       {/* <ContactCTASection /> */}
     </main>
   );
 }
+
+// logo
+//

@@ -1,99 +1,250 @@
-// src/components/home/GlobalExportSection.jsx
-import { useEffect, useRef } from "react";
-import { useScrollReveal } from "../../hooks/useScrollReveal";
+import { useRef } from "react";
+import { motion } from "framer-motion";
 
-const countries = [
-  { name: "United Kingdom", flag: "🇬🇧", since: "Est. 2008" },
-  { name: "United States", flag: "🇺🇸", since: "Est. 2010" },
-  { name: "Canada", flag: "🇨🇦", since: "Est. 2011" },
-  { name: "Australia", flag: "🇦🇺", since: "Est. 2013" },
-  { name: "UAE", flag: "🇦🇪", since: "Est. 2009" },
-  { name: "Germany", flag: "🇩🇪", since: "Est. 2015" },
-  { name: "New Zealand", flag: "🇳🇿", since: "Est. 2016" },
-  { name: "South Africa", flag: "🇿🇦", since: "Est. 2018" },
+const COUNTRIES = [
+  { name: "USA", code: "us" },
+  { name: "UK", code: "gb" },
+  { name: "UAE", code: "ae" },
+  { name: "Saudi Arabia", code: "sa" },
+  { name: "Australia", code: "au" },
+  { name: "Canada", code: "ca" },
+  { name: "Qatar", code: "qa" },
+  { name: "Oman", code: "om" },
+  { name: "Singapore", code: "sg" },
+  { name: "Malaysia", code: "my" },
+  { name: "Germany", code: "de" },
 ];
 
-const stats = [
-  { value: "20+", label: "Years Exporting" },
-  { value: "30+", label: "Countries Reached" },
-  { value: "10K+", label: "Units Shipped" },
-];
+// Duplicate for seamless infinite loop
+const MARQUEE_ITEMS = [...COUNTRIES, ...COUNTRIES, ...COUNTRIES];
+
+const FlagImg = ({ code, name, size = "md" }) => {
+  const map = {
+    sm: { w: 36, h: 26, cdn: "w40", cdn2x: "w80" },
+    md: { w: 52, h: 37, cdn: "w80", cdn2x: "w160" },
+  };
+  const { w, h, cdn, cdn2x } = map[size];
+  return (
+    <img
+      src={`https://flagcdn.com/${cdn}/${code}.png`}
+      srcSet={`https://flagcdn.com/${cdn2x}/${code}.png 2x`}
+      alt={name}
+      width={w}
+      height={h}
+      className="rounded object-cover"
+      loading="lazy"
+      style={{ display: "block" }}
+    />
+  );
+};
 
 export default function GlobalExportSection() {
-  const sectionRef = useRef(null);
-  useScrollReveal(sectionRef);
-
   return (
     <section
-      ref={sectionRef}
-      className="bg-charcoal text-white py-28 overflow-hidden"
+      className="py-8 md:py-12 overflow-hidden"
+      style={{ background: "#f5f2ee" }}
     >
+      {/* ── Inline keyframe styles ── */}
+      <style>{`
+        @keyframes marquee {
+          0%   { transform: translateX(0); }
+          100% { transform: translateX(-33.333%); }
+        }
+        .marquee-track {
+          display: flex;
+          width: max-content;
+          animation: marquee 22s linear infinite;
+          will-change: transform;
+        }
+        .marquee-track:hover {
+          animation-play-state: paused;
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .marquee-track { animation: none; }
+        }
+      `}</style>
+
       <div className="container-site">
         {/* Header */}
-        <div className="reveal-item mb-20">
-          <p className="section-label text-brand/60 mb-4">Global Presence</p>
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
-            <h2 className="font-display text-5xl md:text-6xl lg:text-7xl font-semibold leading-tight text-white max-w-2xl">
-              Crafted in India,
-              <br />
-              <span className="text-brand">Trusted Worldwide.</span>
-            </h2>
-            <p className="text-clay-300 text-base max-w-sm leading-relaxed md:text-right">
-              From the heart of Delhi, our tandoors reach professional kitchens
-              and culinary artisans across every continent.
+        <div className="max-w-3xl mx-auto text-center mb-5 md:mb-8">
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="flex items-center justify-center gap-3 mb-4"
+          >
+            <div className="w-5 h-px" style={{ background: "#8b1a1a" }} />
+            <p
+              className="uppercase text-[10px] md:text-[11px] font-semibold"
+              style={{ color: "#8b1a1a", letterSpacing: "0.18em" }}
+            >
+              Global Export
             </p>
-          </div>
-          <div className="divider-brand mt-8" />
-        </div>
+            <div className="w-5 h-px" style={{ background: "#8b1a1a" }} />
+          </motion.div>
 
-        {/* Stats Row */}
-        <div className="reveal-item grid grid-cols-3 gap-0 border border-white/10 mb-20">
-          {stats.map((stat, i) => (
-            <div
-              key={i}
-              className={`py-10 px-8 text-center ${
-                i < stats.length - 1 ? "border-r border-white/10" : ""
-              }`}
-            >
-              <p className="font-display text-4xl md:text-5xl font-semibold text-brand mb-2">
-                {stat.value}
-              </p>
-              <p className="text-xs uppercase tracking-ultra text-white/40">
-                {stat.label}
-              </p>
-            </div>
-          ))}
-        </div>
+          <motion.h2
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.08 }}
+            className="font-serif font-bold leading-tight"
+            style={{
+              color: "#1a1410",
+              fontSize: "clamp(2rem, 3vw, 3rem)",
+              letterSpacing: "-0.02em",
+            }}
+          >
+            We Export <span style={{ color: "#8b1a1a" }}>Globally</span>
+          </motion.h2>
 
-        {/* Countries Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-px bg-white/10">
-          {countries.map((country, i) => (
-            <div
-              key={i}
-              className="reveal-item bg-charcoal group px-8 py-7 flex items-center justify-between hover:bg-white/5 transition-colors duration-300 cursor-default"
-            >
-              <div className="flex items-center gap-4">
-                <span className="text-2xl">{country.flag}</span>
-                <span className="text-sm font-medium text-white/80 group-hover:text-white transition-colors duration-300">
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.14 }}
+            className="mt-3 text-sm md:text-base"
+            style={{ color: "#8a7060" }}
+          >
+            Proudly exporting our commercial kitchen equipment to 30+ countries
+            worldwide.
+          </motion.p>
+        </div>
+      </div>
+
+      {/* ── MOBILE: Infinite marquee — full bleed, no container ── */}
+      <div className="md:hidden relative">
+        {/* Left fade */}
+        <div
+          className="absolute left-0 top-0 bottom-0 w-10 z-10 pointer-events-none"
+          style={{
+            background: "linear-gradient(to right, #f5f2ee, transparent)",
+          }}
+        />
+        {/* Right fade */}
+        <div
+          className="absolute right-0 top-0 bottom-0 w-10 z-10 pointer-events-none"
+          style={{
+            background: "linear-gradient(to left, #f5f2ee, transparent)",
+          }}
+        />
+
+        <div className="overflow-hidden">
+          <div className="marquee-track gap-3 py-1" style={{ gap: "12px" }}>
+            {MARQUEE_ITEMS.map((country, i) => (
+              <div
+                key={`${country.code}-${i}`}
+                className="shrink-0 flex flex-col items-center justify-center text-center rounded-2xl"
+                style={{
+                  width: "100px",
+                  paddingTop: "14px",
+                  paddingBottom: "14px",
+                  paddingLeft: "8px",
+                  paddingRight: "8px",
+                  background: "#ffffff",
+                  border: "1px solid rgba(60,40,20,0.08)",
+                  boxShadow: "0 1px 4px rgba(60,40,20,0.06)",
+                }}
+              >
+                <FlagImg code={country.code} name={country.name} size="sm" />
+                <span
+                  className="mt-2 font-medium leading-tight"
+                  style={{
+                    color: "#3d2b1f",
+                    fontSize: "11px",
+                    maxWidth: "80px",
+                    display: "block",
+                  }}
+                >
                   {country.name}
                 </span>
               </div>
-              <span className="text-[10px] uppercase tracking-ultra text-white/25 group-hover:text-brand/60 transition-colors duration-300 hidden sm:block">
-                {country.since}
-              </span>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
+      </div>
 
-        {/* Bottom CTA */}
-        <div className="reveal-item mt-16 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 border-t border-white/10 pt-12">
-          <p className="text-white/50 text-sm max-w-md leading-relaxed">
-            Looking to partner with us for distribution in your region? We work
-            with importers, restaurant chains, and hospitality groups globally.
-          </p>
-          <a href="/contact" className="btn-primary shrink-0">
-            Enquire for Export
-          </a>
+      {/* ── DESKTOP: 2-row grid ── */}
+      <div className="container-site">
+        <div className="hidden md:grid grid-cols-4 lg:grid-cols-6 gap-4 lg:gap-5 max-w-6xl mx-auto mt-0">
+          {COUNTRIES.map((country, i) => (
+            <motion.div
+              key={country.name}
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{
+                delay: i * 0.04,
+                duration: 0.4,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+              className="group"
+            >
+              <div
+                className="rounded-2xl px-4 py-5 text-center h-full flex flex-col items-center transition-all duration-300"
+                style={{
+                  background: "#ffffff",
+                  border: "1px solid rgba(60,40,20,0.08)",
+                  boxShadow: "0 1px 3px rgba(60,40,20,0.05)",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = "translateY(-3px)";
+                  e.currentTarget.style.boxShadow =
+                    "0 10px 28px rgba(60,40,20,0.10)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = "translateY(0)";
+                  e.currentTarget.style.boxShadow =
+                    "0 1px 3px rgba(60,40,20,0.05)";
+                }}
+              >
+                <FlagImg code={country.code} name={country.name} size="md" />
+                <p
+                  className="mt-3 text-sm font-medium leading-tight"
+                  style={{ color: "#3d2b1f" }}
+                >
+                  {country.name}
+                </p>
+              </div>
+            </motion.div>
+          ))}
+
+          {/* +20 more card */}
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{
+              delay: 0.18,
+              duration: 0.4,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+          >
+            <div
+              className="rounded-2xl px-4 py-5 text-center h-full flex flex-col items-center justify-center"
+              style={{
+                background: "rgba(139,26,26,0.05)",
+                border: "1px solid rgba(139,26,26,0.14)",
+              }}
+            >
+              <div
+                className="w-14 h-14 rounded-full flex items-center justify-center text-lg font-semibold"
+                style={{
+                  background: "#ffffff",
+                  color: "#8b1a1a",
+                  border: "1px solid rgba(139,26,26,0.12)",
+                }}
+              >
+                +20
+              </div>
+              <p
+                className="mt-3 text-sm font-medium"
+                style={{ color: "#8b1a1a" }}
+              >
+                More Countries
+              </p>
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>

@@ -49,10 +49,13 @@ export default function FeaturedProductsSection() {
   const products = activeTab === "popular" ? popular : newArrivals;
 
   return (
-    <section className="py-24 md:py-32 bg-clay-50 overflow-hidden">
+    <section
+      className="py-12 md:py-16 overflow-hidden"
+      style={{ background: "#f5f2ee" }}
+    >
       <div className="container-site">
         {/* ── SECTION HEADER ─────────────────────────── */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-12">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
           {/* Left: Label + Heading */}
           <div>
             <FadeIn>
@@ -139,6 +142,7 @@ export default function FeaturedProductsSection() {
                       key={product._id}
                       product={product}
                       index={i}
+                      category={product.category?.name}
                     />
                   ))}
                 </div>
@@ -150,7 +154,7 @@ export default function FeaturedProductsSection() {
         {/* ── BOTTOM CTA ─────────────────────────────── */}
         {!loading && products.length > 0 && (
           <FadeIn delay={0.3}>
-            <div className="mt-12 flex flex-col sm:flex-row items-center justify-between gap-4 pt-8 border-t border-clay-200">
+            <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t border-clay-200">
               <p className="text-sm text-charcoal-soft">
                 Showing{" "}
                 <span className="text-charcoal font-medium">

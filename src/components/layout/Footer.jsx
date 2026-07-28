@@ -1,170 +1,452 @@
-import { Link } from "react-router-dom";
-import { Phone, Mail, MapPin, Instagram, Youtube } from "lucide-react";
-import { FaWhatsapp } from "react-icons/fa";
+// import { motion } from "framer-motion";
+// import { Link } from "react-router-dom";
+// import { Phone, Mail, MapPin, Clock, MessageCircle } from "lucide-react";
 
-const categories = [
-  { label: "Home Tandoors", href: "/products/home-tandoors" },
-  { label: "Restaurant Tandoors", href: "/products/restaurant-tandoors" },
-  { label: "Premium Tandoors", href: "/products/premium-tandoors" },
-  { label: "Accessories", href: "/products/accessories" },
-  { label: "Wood Fire Brick Ovens", href: "/products/wood-fire-brick-ovens" },
-  { label: "Clay Utensils", href: "/products/clay-tandoors" },
-  { label: "Copper Utensils", href: "/products/copper-tandoors" },
+// const contactItems = [
+//   {
+//     icon: Phone,
+//     title: "Call Us",
+//     value: "+91 98765 43210",
+//     href: "tel:+919876543210",
+//   },
+//   {
+//     icon: Mail,
+//     title: "Email Us",
+//     value: "info@aonetandoor.com",
+//     href: "mailto:info@aonetandoor.com",
+//   },
+//   {
+//     icon: MapPin,
+//     title: "Our Location",
+//     value: "Ludhiana, Punjab, India",
+//     href: "/contact",
+//   },
+//   {
+//     icon: Clock,
+//     title: "Working Hours",
+//     value: "Mon - Sat: 9am - 6pm",
+//     href: "/contact",
+//   },
+// ];
+
+// export default function Footer() {
+//   return (
+//     <footer
+//       className="relative pt-10 md:pt-14"
+//       style={{ background: "#f5f2ee" }}
+//     >
+//       <div className="container-site">
+//         {/* CTA Banner */}
+//         <motion.div
+//           initial={{ opacity: 0, y: 24 }}
+//           whileInView={{ opacity: 1, y: 0 }}
+//           viewport={{ once: true }}
+//           transition={{ duration: 0.6 }}
+//           className="relative overflow-hidden rounded-[20px] border"
+//           style={{
+//             // background:
+//             //   "linear-gradient(135deg, #6f1918 0%, #7d1d1c 35%, #5b1212 100%)",
+//             backgroundColor: "#944E4E",
+//             borderColor: "rgba(255,255,255,0.12)",
+//             boxShadow: "0 18px 50px rgba(91,18,18,0.18)",
+//           }}
+//         >
+//           {/* background depth */}
+//           <div
+//             className="absolute inset-0"
+//             style={{
+//               background:
+//                 "radial-gradient(circle at 20% 20%, rgba(255,255,255,0.08), transparent 30%), radial-gradient(circle at 80% 30%, rgba(255,255,255,0.06), transparent 24%), linear-gradient(to right, rgba(0,0,0,0.12), rgba(0,0,0,0.02))",
+//             }}
+//           />
+
+//           <div className="relative grid lg:grid-cols-[1.1fr_0.9fr] items-center">
+//             {/* Left content */}
+//             <div className="px-6 py-10 sm:px-8 md:px-12 md:py-14 lg:pr-8">
+//               <p
+//                 className="text-[11px] uppercase tracking-[0.22em] font-semibold"
+//                 style={{ color: "rgba(255,244,240,0.82)" }}
+//               >
+//                 Ready to upgrade your kitchen?
+//               </p>
+
+//               <h2
+//                 className="mt-4 font-serif font-bold leading-[1.02]"
+//                 style={{
+//                   color: "#fffaf7",
+//                   fontSize: "clamp(1.8rem, 3vw, 3rem)",
+//                   maxWidth: "none",
+//                   letterSpacing: "-0.03em",
+//                 }}
+//               >
+//                 Need Commercial Kitchen Equipment?
+//               </h2>
+
+//               <p
+//                 className="mt-5 text-sm md:text-lg leading-relaxed"
+//                 style={{
+//                   color: "rgba(255,245,242,0.82)",
+//                   maxWidth: "34rem",
+//                 }}
+//               >
+//                 Tell us your requirements and our experts will help you choose
+//                 the right equipment for your business.
+//               </p>
+
+//               <div className="mt-8 flex flex-col sm:flex-row gap-4">
+//                 <Link
+//                   to="/contact"
+//                   className="inline-flex items-center justify-center min-h-[52px] px-7 text-sm font-semibold uppercase tracking-[0.14em] rounded-[10px] transition-all duration-300"
+//                   style={{
+//                     background: "#fffaf7",
+//                     color: "#6b1716",
+//                     border: "1px solid rgba(255,255,255,0.45)",
+//                   }}
+//                 >
+//                   Request a Quote
+//                 </Link>
+
+//                 <a
+//                   href="https://wa.me/919876543210"
+//                   target="_blank"
+//                   rel="noopener noreferrer"
+//                   className="inline-flex items-center justify-center gap-3 min-h-[52px] px-7 text-sm font-semibold uppercase tracking-[0.14em] rounded-[10px] transition-all duration-300"
+//                   style={{
+//                     background: "transparent",
+//                     color: "#fffaf7",
+//                     border: "1px solid rgba(255,255,255,0.35)",
+//                   }}
+//                 >
+//                   <MessageCircle size={18} />
+//                   Whatsapp Us
+//                 </a>
+//               </div>
+//             </div>
+
+//             {/* Right visual */}
+//             <div className="relative h-full min-h-[280px] md:min-h-[360px] lg:min-h-[100%] flex items-end justify-center">
+//               <div
+//                 className="absolute inset-0"
+//                 style={{
+//                   background:
+//                     "linear-gradient(to left, rgba(255,255,255,0.02), transparent 55%)",
+//                 }}
+//               />
+//               <img
+//                 src="/Footer.png"
+//                 alt="Commercial tandoor equipment"
+//                 className="relative z-10 w-[82%] max-w-[480px] object-contain drop-shadow-[0_24px_40px_rgba(0,0,0,0.28)]"
+//                 loading="lazy"
+//               />
+//             </div>
+//           </div>
+//         </motion.div>
+
+//         {/* Contact strip */}
+//         <div
+//           className="mt-5 rounded-[18px] overflow-hidden border"
+//           style={{
+//             background: "#fffdfb",
+//             borderColor: "rgba(79,38,22,0.08)",
+//             boxShadow: "0 10px 30px rgba(60,40,20,0.05)",
+//           }}
+//         >
+//           <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4">
+//             {contactItems.map((item, i) => {
+//               const Icon = item.icon;
+//               const Wrapper = item.href?.startsWith("/") ? Link : "a";
+//               const wrapperProps = item.href?.startsWith("/")
+//                 ? { to: item.href }
+//                 : { href: item.href };
+
+//               return (
+//                 <Wrapper
+//                   key={item.title}
+//                   {...wrapperProps}
+//                   className="group flex items-start gap-4 px-6 py-6 md:px-8 md:py-7 transition-colors duration-300"
+//                   style={{
+//                     borderRight:
+//                       i !== contactItems.length - 1
+//                         ? "1px solid rgba(79,38,22,0.08)"
+//                         : "none",
+//                     borderBottom:
+//                       i < 2 ? "1px solid rgba(79,38,22,0.08)" : "none",
+//                   }}
+//                 >
+//                   <div
+//                     className="shrink-0 w-11 h-11 rounded-full flex items-center justify-center"
+//                     style={{
+//                       background: "rgba(122,27,26,0.06)",
+//                       color: "#7a1b1a",
+//                     }}
+//                   >
+//                     <Icon size={20} strokeWidth={1.8} />
+//                   </div>
+
+//                   <div>
+//                     <p
+//                       className="text-sm font-semibold"
+//                       style={{ color: "#4f2616" }}
+//                     >
+//                       {item.title}
+//                     </p>
+//                     <p
+//                       className="mt-1 text-sm md:text-base"
+//                       style={{ color: "#2e2018" }}
+//                     >
+//                       {item.value}
+//                     </p>
+//                   </div>
+//                 </Wrapper>
+//               );
+//             })}
+//           </div>
+//         </div>
+//       </div>
+
+//       {/* Bottom bar */}
+//       <div
+//         className="mt-6"
+//         style={{
+//           backgroundColor: "#944E4E",
+//         }}
+//       >
+//         <div className="container-site">
+//           <div className="py-5 text-center">
+//             <p className="text-sm" style={{ color: "rgba(255,250,247,0.9)" }}>
+//               © 2026 A-One Tandoor. All Rights Reserved.
+//             </p>
+//           </div>
+//         </div>
+//       </div>
+//     </footer>
+//   );
+// }
+
+import { motion } from "framer-motion";
+import { Link, useLocation } from "react-router-dom"; // ✅ useLocation add kiya
+import { Phone, Mail, MapPin, Clock, MessageCircle } from "lucide-react";
+
+const contactItems = [
+  {
+    icon: Phone,
+    title: "Call Us",
+    value: "+91 98765 43210",
+    href: "tel:+919876543210",
+  },
+  {
+    icon: Mail,
+    title: "Email Us",
+    value: "info@aonetandoor.com",
+    href: "mailto:info@aonetandoor.com",
+  },
+  {
+    icon: MapPin,
+    title: "Our Location",
+    value: "Ludhiana, Punjab, India",
+    href: "/contact",
+  },
+  {
+    icon: Clock,
+    title: "Working Hours",
+    value: "Mon - Sat: 9am - 6pm",
+    href: "/contact",
+  },
 ];
 
 export default function Footer() {
+  const { pathname } = useLocation(); // ✅ pathname liya
+
   return (
-    <footer className="bg-charcoal text-white/80">
-      {/* Top CTA Band */}
-      <div className="bg-brand py-12">
-        <div className="container-site flex flex-col md:flex-row items-center justify-between gap-6">
-          <div>
-            <p className="section-label text-white/60">
-              Ready to Elevate Your Kitchen?
-            </p>
-            <h3 className="font-display text-3xl text-white mt-1">
-              Craft Your Perfect Tandoor
-            </h3>
-          </div>
-          <Link
-            to="/contact"
-            className="btn-outline border-white text-white hover:bg-white hover:text-brand"
+    <footer
+      className="relative pt-10 md:pt-14"
+      style={{ background: "#f5f2ee" }}
+    >
+      <div className="container-site">
+        {/* ✅ CTA Banner — sirf home page "/" pe dikhega */}
+        {pathname === "/" && (
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="relative overflow-hidden rounded-[20px] border"
+            style={{
+              // background:
+              //   "linear-gradient(135deg, #6f1918 0%, #7d1d1c 35%, #5b1212 100%)",
+              backgroundColor: "#944E4E",
+              borderColor: "rgba(255,255,255,0.12)",
+              boxShadow: "0 18px 50px rgba(91,18,18,0.18)",
+            }}
           >
-            Request a Custom Quote
-          </Link>
-        </div>
-      </div>
+            {/* background depth */}
+            <div
+              className="absolute inset-0"
+              style={{
+                background:
+                  "radial-gradient(circle at 20% 20%, rgba(255,255,255,0.08), transparent 30%), radial-gradient(circle at 80% 30%, rgba(255,255,255,0.06), transparent 24%), linear-gradient(to right, rgba(0,0,0,0.12), rgba(0,0,0,0.02))",
+              }}
+            />
 
-      {/* Main Footer */}
-      <div className="container-site py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-        {/* Brand */}
-        <div className="lg:col-span-1">
-          <Link to="/" className="inline-block mb-4">
-            <span className="font-display text-2xl font-bold text-white">
-              A-one Tandoor
-            </span>
-            <span className="block text-[9px] text-brand tracking-ultra uppercase mt-0.5">
-              Since 2005
-            </span>
-          </Link>
-          <p className="text-sm text-white/50 leading-relaxed mt-4 max-w-xs">
-            Aone Tandoor is your one-stop shop for premium commercial kitchen
-            equipment. From traditional clay pot tandoors to modern electric
-            models, we offer a wide range of products designed to elevate your
-            culinary experience.
-          </p>
-          <div className="flex items-center gap-4 mt-6">
-            <a
-              href="#"
-              aria-label="Instagram"
-              className="p-2 border border-white/20 text-white/50 hover:border-brand hover:text-brand transition-colors"
-            >
-              <Instagram size={16} />
-            </a>
-            <a
-              href="#"
-              aria-label="YouTube"
-              className="p-2 border border-white/20 text-white/50 hover:border-brand hover:text-brand transition-colors"
-            >
-              <Youtube size={16} />
-            </a>
-            <a
-              href="https://wa.me/919315102828"
-              aria-label="WhatsApp"
-              className="p-2 border border-white/20 text-white/50 hover:border-brand hover:text-brand transition-colors"
-            >
-              <FaWhatsapp size={16} />
-            </a>
+            <div className="relative grid lg:grid-cols-[1.1fr_0.9fr] items-center">
+              {/* Left content */}
+              <div className="px-6 py-10 sm:px-8 md:px-12 md:py-14 lg:pr-8">
+                <p
+                  className="text-[11px] uppercase tracking-[0.22em] font-semibold"
+                  style={{ color: "rgba(255,244,240,0.82)" }}
+                >
+                  Ready to upgrade your kitchen?
+                </p>
+
+                <h2
+                  className="mt-4 font-serif font-bold leading-[1.02]"
+                  style={{
+                    color: "#fffaf7",
+                    fontSize: "clamp(1.8rem, 3vw, 3rem)",
+                    maxWidth: "none",
+                    letterSpacing: "-0.03em",
+                  }}
+                >
+                  Need Commercial Kitchen Equipment?
+                </h2>
+
+                <p
+                  className="mt-5 text-sm md:text-lg leading-relaxed"
+                  style={{
+                    color: "rgba(255,245,242,0.82)",
+                    maxWidth: "34rem",
+                  }}
+                >
+                  Tell us your requirements and our experts will help you choose
+                  the right equipment for your business.
+                </p>
+
+                <div className="mt-8 flex flex-col sm:flex-row gap-4">
+                  <Link
+                    to="/contact"
+                    className="inline-flex items-center justify-center min-h-[52px] px-7 text-sm font-semibold uppercase tracking-[0.14em] rounded-[10px] transition-all duration-300"
+                    style={{
+                      background: "#fffaf7",
+                      color: "#6b1716",
+                      border: "1px solid rgba(255,255,255,0.45)",
+                    }}
+                  >
+                    Request a Quote
+                  </Link>
+
+                  <a
+                    href="https://wa.me/919876543210"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-3 min-h-[52px] px-7 text-sm font-semibold uppercase tracking-[0.14em] rounded-[10px] transition-all duration-300"
+                    style={{
+                      background: "transparent",
+                      color: "#fffaf7",
+                      border: "1px solid rgba(255,255,255,0.35)",
+                    }}
+                  >
+                    <MessageCircle size={18} />
+                    Whatsapp Us
+                  </a>
+                </div>
+              </div>
+
+              {/* Right visual */}
+              <div className="relative h-full min-h-[280px] md:min-h-[360px] lg:min-h-[100%] flex items-end justify-center">
+                <div
+                  className="absolute inset-0"
+                  style={{
+                    background:
+                      "linear-gradient(to left, rgba(255,255,255,0.02), transparent 55%)",
+                  }}
+                />
+                <img
+                  src="/Footer.png"
+                  alt="Commercial tandoor equipment"
+                  className="relative z-10 w-[82%] max-w-[480px] object-contain drop-shadow-[0_24px_40px_rgba(0,0,0,0.28)]"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+          </motion.div>
+        )}
+        {/* ✅ CTA Banner end */}
+
+        {/* Contact strip */}
+        <div
+          className="mt-5 rounded-[18px] overflow-hidden border"
+          style={{
+            background: "#fffdfb",
+            borderColor: "rgba(79,38,22,0.08)",
+            boxShadow: "0 10px 30px rgba(60,40,20,0.05)",
+          }}
+        >
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4">
+            {contactItems.map((item, i) => {
+              const Icon = item.icon;
+              const Wrapper = item.href?.startsWith("/") ? Link : "a";
+              const wrapperProps = item.href?.startsWith("/")
+                ? { to: item.href }
+                : { href: item.href };
+
+              return (
+                <Wrapper
+                  key={item.title}
+                  {...wrapperProps}
+                  className="group flex items-start gap-4 px-6 py-6 md:px-8 md:py-7 transition-colors duration-300"
+                  style={{
+                    borderRight:
+                      i !== contactItems.length - 1
+                        ? "1px solid rgba(79,38,22,0.08)"
+                        : "none",
+                    borderBottom:
+                      i < 2 ? "1px solid rgba(79,38,22,0.08)" : "none",
+                  }}
+                >
+                  <div
+                    className="shrink-0 w-11 h-11 rounded-full flex items-center justify-center"
+                    style={{
+                      background: "rgba(122,27,26,0.06)",
+                      color: "#7a1b1a",
+                    }}
+                  >
+                    <Icon size={20} strokeWidth={1.8} />
+                  </div>
+
+                  <div>
+                    <p
+                      className="text-sm font-semibold"
+                      style={{ color: "#4f2616" }}
+                    >
+                      {item.title}
+                    </p>
+                    <p
+                      className="mt-1 text-sm md:text-base"
+                      style={{ color: "#2e2018" }}
+                    >
+                      {item.value}
+                    </p>
+                  </div>
+                </Wrapper>
+              );
+            })}
           </div>
         </div>
-
-        {/* Products */}
-        <div>
-          <h4 className="text-xs tracking-ultra uppercase text-white/40 mb-5">
-            Products
-          </h4>
-          <ul className="flex flex-col gap-3">
-            {categories.map((c) => (
-              <li key={c.href}>
-                <Link
-                  to={c.href}
-                  className="text-sm text-white/60 hover:text-brand transition-colors"
-                >
-                  {c.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* Company */}
-        <div>
-          <h4 className="text-xs tracking-ultra uppercase text-white/40 mb-5">
-            Company
-          </h4>
-          <ul className="flex flex-col gap-3">
-            {[
-              ["About Us", "/about"],
-              ["Certifications", "/certifications"],
-              ["Contact", "/contact"],
-            ].map(([label, href]) => (
-              <li key={href}>
-                <Link
-                  to={href}
-                  className="text-sm text-white/60 hover:text-brand transition-colors"
-                >
-                  {label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* Contact */}
-        <div>
-          <h4 className="text-xs tracking-ultra uppercase text-white/40 mb-5">
-            Contact Us
-          </h4>
-          <ul className="flex flex-col gap-4">
-            <li className="flex items-start gap-3">
-              <MapPin size={15} className="text-brand mt-0.5 shrink-0" />
-              <span className="text-sm text-white/60 leading-relaxed">
-                RZ - 59 Santosh Park, Uttam Nagar East Near Shiv Mandir,
-                <br />
-                New Delhi - 110059 India
-              </span>
-            </li>
-            <li>
-              <a
-                href="tel:+91 9582828397, +91 9315102828"
-                className="flex items-center gap-3 text-sm text-white/60 hover:text-brand transition-colors"
-              >
-                <Phone size={15} className="text-brand shrink-0" />
-                +91 9582828397 <br /> +91 9315102828
-              </a>
-            </li>
-            <li>
-              <a
-                href="mailto:info@tandoorcraft.com"
-                className="flex items-center gap-3 text-sm text-white/60 hover:text-brand transition-colors"
-              >
-                <Mail size={15} className="text-brand shrink-0" />
-                exportersace@gmail.com"
-              </a>
-            </li>
-          </ul>
-        </div>
       </div>
 
-      {/* Bottom Bar */}
-      <div className="border-t border-white/10">
-        <div className="container-site py-5 flex flex-col md:flex-row items-center justify-between gap-3">
-          <p className="text-xs text-white/30">
-            © {new Date().getFullYear()} A-one Tandoor. All rights reserved.
-          </p>
-          <p className="text-xs text-white/30">
-            Designed & Built with precision in India 🇮🇳
-          </p>
+      {/* Bottom bar */}
+      <div
+        className="mt-6"
+        style={{
+          backgroundColor: "#944E4E",
+        }}
+      >
+        <div className="container-site">
+          <div className="py-5 text-center">
+            <p className="text-sm" style={{ color: "rgba(255,250,247,0.9)" }}>
+              © 2026 A-One Tandoor. All Rights Reserved.
+            </p>
+          </div>
         </div>
       </div>
     </footer>

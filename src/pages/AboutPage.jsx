@@ -1,675 +1,711 @@
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
-import FadeIn from "../components/ui/FadeIn";
-import RevealText from "../components/ui/RevealText";
+import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import {
+  Award,
+  Box,
+  Globe,
+  Users,
+  Shield,
+  Settings,
+  ChefHat,
+  Wrench,
+} from "lucide-react";
 
-const MILESTONES = [
+// ─── Reusable fade wrapper ───────────────────────────────────────────────────
+const FadeIn = ({ children, delay = 0, className = "" }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 18 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, margin: "-40px" }}
+    transition={{ duration: 0.55, delay, ease: [0.22, 1, 0.36, 1] }}
+    className={className}
+  >
+    {children}
+  </motion.div>
+);
+
+const SectionLabel = ({ children }) => (
+  <div className="flex items-center gap-2 mb-3">
+    <div className="w-5 h-px" style={{ background: "#8b1a1a" }} />
+    <p
+      className="uppercase text-[10px] font-semibold tracking-[0.2em]"
+      style={{ color: "#8b1a1a" }}
+    >
+      {children}
+    </p>
+  </div>
+);
+
+// ─── 1. Hero ─────────────────────────────────────────────────────────────────
+const HeroSection = () => (
+  <section
+    className="relative overflow-hidden"
+    style={{ background: "#1a0f0e", minHeight: "clamp(320px,55vw,520px)" }}
+  >
+    {/* bg image */}
+    <div className="absolute inset-0">
+      <img
+        src="/about-us.png"
+        alt=""
+        className="w-full h-full object-cover opacity-40"
+        loading="eager"
+      />
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(to right, rgba(10,4,4,0.85) 45%, rgba(10,4,4,0.2))",
+        }}
+      />
+    </div>
+
+    <div className="container-site relative z-10 py-12 md:py-16">
+      <FadeIn>
+        <SectionLabel>Our Legacy</SectionLabel>
+      </FadeIn>
+
+      <FadeIn delay={0.08}>
+        <h1
+          className="font-serif font-bold leading-[1.05]"
+          style={{
+            color: "#fffaf7",
+            fontSize: "clamp(2.2rem,5vw,4.5rem)",
+            letterSpacing: "-0.03em",
+            maxWidth: "14ch",
+          }}
+        >
+          20+ Years of{" "}
+          <em className="not-italic" style={{ color: "#c94040" }}>
+            Manufacturing Excellence
+          </em>
+        </h1>
+      </FadeIn>
+
+      <FadeIn delay={0.14}>
+        <p
+          className="mt-4 text-sm md:text-base leading-relaxed"
+          style={{ color: "rgba(255,245,240,0.72)", maxWidth: "42ch" }}
+        >
+          From traditional clay tandoors to complete commercial kitchen
+          solutions, A-One Tandoor has been serving restaurants, hotels,
+          caterers and food businesses worldwide for over two decades.
+        </p>
+      </FadeIn>
+
+      {/* Stats */}
+      <FadeIn delay={0.22}>
+        <div
+          className="mt-8 flex flex-wrap gap-8 pt-8 border-t"
+          style={{ borderColor: "rgba(255,255,255,0.1)" }}
+        >
+          {[
+            { icon: Award, num: "20+", label: "Years Experience" },
+            { icon: Box, num: "150+", label: "Products" },
+            { icon: Globe, num: "30+", label: "Countries Exported" },
+            { icon: Users, num: "10,000+", label: "Happy Clients" },
+          ].map(({ icon: Icon, num, label }) => (
+            <div key={label} className="flex items-center gap-3">
+              <Icon size={22} style={{ color: "#c94040" }} strokeWidth={1.5} />
+              <div>
+                <p
+                  className="font-serif font-bold text-xl leading-none"
+                  style={{ color: "#fffaf7" }}
+                >
+                  {num}
+                </p>
+                <p
+                  className="mt-1 text-[10px] uppercase tracking-widest"
+                  style={{ color: "rgba(255,245,240,0.5)" }}
+                >
+                  {label}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </FadeIn>
+    </div>
+  </section>
+);
+
+// ─── 2. Our Story ─────────────────────────────────────────────────────────────
+const OurStory = () => (
+  <section className="py-12 md:py-16" style={{ background: "#f5f2ee" }}>
+    <div className="container-site">
+      <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+        <FadeIn>
+          <div
+            className="rounded-xl overflow-hidden"
+            style={{ aspectRatio: "4/3" }}
+          >
+            <img
+              src="/about-factory.jpg"
+              alt="A-One Tandoor factory"
+              className="w-full h-full object-cover"
+              loading="lazy"
+            />
+          </div>
+        </FadeIn>
+
+        <FadeIn delay={0.1}>
+          <SectionLabel>Our Story</SectionLabel>
+          <h2
+            className="font-serif font-bold leading-tight"
+            style={{
+              color: "#1a1410",
+              fontSize: "clamp(1.8rem,3vw,2.8rem)",
+              letterSpacing: "-0.02em",
+            }}
+          >
+            Built on <span style={{ color: "#8b1a1a" }}>Craftsmanship.</span>
+            <br />
+            Driven by Innovation.
+          </h2>
+          <p
+            className="mt-4 text-sm md:text-base leading-relaxed"
+            style={{ color: "#5c4a3a" }}
+          >
+            A-One Tandoor began as a family-run manufacturing workshop in New
+            Delhi with a commitment to preserving the traditional art of tandoor
+            making.
+          </p>
+          <p
+            className="mt-3 text-sm md:text-base leading-relaxed"
+            style={{ color: "#5c4a3a" }}
+          >
+            Over the years, we have expanded into commercial kitchen equipment
+            manufacturing and global exports while maintaining the same
+            dedication to quality, durability and craftsmanship.
+          </p>
+          <div
+            className="mt-5 flex items-start gap-3 pt-5 border-t"
+            style={{ borderColor: "rgba(60,40,20,0.1)" }}
+          >
+            <Award
+              size={18}
+              className="shrink-0 mt-0.5"
+              style={{ color: "#8b1a1a" }}
+              strokeWidth={1.5}
+            />
+            <p
+              className="text-sm leading-relaxed font-medium"
+              style={{ color: "#8b1a1a" }}
+            >
+              Our promise is simple — deliver products that perform, last long
+              and build trust.
+            </p>
+          </div>
+        </FadeIn>
+      </div>
+    </div>
+  </section>
+);
+
+// ─── 3. Manufacturing Facility ────────────────────────────────────────────────
+const FACILITY = [
   {
-    year: "2000",
-    title: "Founded in New Delhi",
-    desc: "Started as a small workshop crafting tandoors by hand, carrying forward our ancestral craft of tandoor making.",
+    img: "/facility-1.jpg",
+    icon: Settings,
+    title: "Advanced Machinery",
+    desc: "Modern equipment for precision engineering",
   },
   {
-    year: "2005",
-    title: "Expanded Product Range",
-    desc: "Introduced cooking ranges, fast food machinery, and catering equipment to serve diverse kitchen needs.",
+    img: "/facility-2.jpg",
+    icon: Users,
+    title: "Skilled Craftsmen",
+    desc: "Experienced team with generational expertise",
   },
   {
-    year: "2010",
-    title: "First International Export",
-    desc: "Expanded to international markets, marking the beginning of our global journey as exporters.",
+    img: "/facility-3.jpg",
+    icon: Shield,
+    title: "Quality Inspection",
+    desc: "Rigorous testing at every stage of production",
   },
   {
-    year: "2015",
-    title: "ISO 9001 Certification",
-    desc: "Received ISO quality certification, validating our rigorous manufacturing standards.",
+    img: "/facility-4.jpg",
+    icon: Box,
+    title: "Export Packaging",
+    desc: "Secure packaging for safe international delivery",
   },
   {
-    year: "2019",
-    title: "10,000 Clients Milestone",
-    desc: "Celebrated serving over 10,000 happy customers across restaurants, hotels, and homes worldwide.",
-  },
-  {
-    year: "2024",
-    title: "Digital Catalogue Launch",
-    desc: "Launched our new digital platform to serve clients across all time zones seamlessly.",
+    img: "/facility-5.jpg",
+    icon: Wrench,
+    title: "Custom Manufacturing",
+    desc: "Tailor-made solutions as per client requirements",
   },
 ];
 
-const STATS = [
-  ["20+", "Years in Business"],
-  ["30+", "Countries Served"],
-  ["10,000+", "Happy Clients"],
-  ["50+", "Product Models"],
-];
+const ManufacturingSection = () => (
+  <section className="py-12 md:py-16" style={{ background: "#ffffff" }}>
+    <div className="container-site">
+      <FadeIn className="text-center mb-8">
+        <SectionLabel>Manufacturing Facility</SectionLabel>
+        <h2
+          className="font-serif font-bold"
+          style={{
+            color: "#1a1410",
+            fontSize: "clamp(1.6rem,2.8vw,2.6rem)",
+            letterSpacing: "-0.02em",
+          }}
+        >
+          Precision Manufacturing. Quality Assured.
+        </h2>
+      </FadeIn>
 
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-4">
+        {FACILITY.map(({ img, icon: Icon, title, desc }, i) => (
+          <FadeIn key={title} delay={i * 0.06}>
+            <div
+              className="group rounded-xl overflow-hidden border"
+              style={{
+                borderColor: "rgba(60,40,20,0.07)",
+                background: "#faf9f6",
+              }}
+            >
+              <div className="overflow-hidden" style={{ aspectRatio: "1/1" }}>
+                <img
+                  src={img}
+                  alt={title}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  loading="lazy"
+                />
+              </div>
+              <div className="p-3">
+                <div className="flex items-center gap-2 mb-1">
+                  <Icon
+                    size={14}
+                    style={{ color: "#8b1a1a" }}
+                    strokeWidth={1.8}
+                  />
+                  <p
+                    className="font-semibold text-xs"
+                    style={{ color: "#1a1410" }}
+                  >
+                    {title}
+                  </p>
+                </div>
+                <p
+                  className="text-[11px] leading-snug"
+                  style={{ color: "#8a7060" }}
+                >
+                  {desc}
+                </p>
+              </div>
+            </div>
+          </FadeIn>
+        ))}
+      </div>
+    </div>
+  </section>
+);
+
+// ─── 4. Expertise ────────────────────────────────────────────────────────────
 const EXPERTISE = [
   {
+    icon: ChefHat,
     title: "Tandoors & Clay Products",
-    desc: "Crafted with precision and care — traditional clay tandoors, stainless steel tandoors, and custom-made options to suit different culinary needs.",
+    desc: "Traditional and modern tandoors built for commercial and residential use.",
   },
   {
-    title: "Cooking Ranges",
-    desc: "Built for both domestic and commercial kitchens, equipped with the latest technology for efficiency and safety.",
+    icon: Settings,
+    title: "Commercial Kitchen Equipment",
+    desc: "Complete range of equipment for restaurants and food businesses.",
   },
   {
-    title: "Fast Food Machinery",
-    desc: "Fryers, grills, and ovens designed for high-demand fast food establishments, ensuring quick and consistent results.",
-  },
-  {
+    icon: Wrench,
     title: "Catering Equipment",
-    desc: "From buffet setups to heavy-duty kitchen machinery — ideal for events, hotels, and large-scale food production.",
+    desc: "Heavy-duty equipment designed for catering and large-scale operations.",
+  },
+  {
+    icon: Box,
+    title: "Custom Manufacturing",
+    desc: "We build equipment as per your exact specifications and project needs.",
   },
 ];
 
-const COMMITMENTS = [
-  {
-    title: "Quality Assurance",
-    desc: "Every product undergoes rigorous quality checks using the finest materials and latest manufacturing techniques.",
-  },
-  {
-    title: "Innovation",
-    desc: "We continuously invest in R&D to bring innovative products that enhance productivity and efficiency.",
-  },
-  {
-    title: "Customer Satisfaction",
-    desc: "Our customers are at the heart of everything we do. Our dedicated team is always ready to assist with any queries.",
-  },
-  {
-    title: "Global Reach",
-    desc: "Strong presence in international markets — we handle all aspects of exporting, ensuring products reach you safely and on time.",
-  },
-];
+const ExpertiseSection = () => (
+  <section className="py-12 md:py-16" style={{ background: "#f5f2ee" }}>
+    <div className="container-site">
+      <div className="grid lg:grid-cols-[1fr_2fr] gap-8 md:gap-12 items-start">
+        <FadeIn>
+          <SectionLabel>Our Expertise</SectionLabel>
+          <h2
+            className="font-serif font-bold leading-tight"
+            style={{
+              color: "#1a1410",
+              fontSize: "clamp(1.8rem,3vw,2.8rem)",
+              letterSpacing: "-0.02em",
+            }}
+          >
+            Manufacturing Solutions For{" "}
+            <span style={{ color: "#8b1a1a" }}>Every Kitchen</span>
+          </h2>
+          <p
+            className="mt-4 text-sm leading-relaxed"
+            style={{ color: "#5c4a3a" }}
+          >
+            From clay tandoors to commercial kitchen equipment, we offer a wide
+            range of solutions for all types of food businesses.
+          </p>
+        </FadeIn>
 
-const WHY_CHOOSE = [
+        <div className="grid grid-cols-2 gap-3 md:gap-4">
+          {EXPERTISE.map(({ icon: Icon, title, desc }, i) => (
+            <FadeIn key={title} delay={i * 0.07}>
+              <div
+                className="h-full rounded-xl p-4 md:p-5 border"
+                style={{
+                  background: "#ffffff",
+                  borderColor: "rgba(60,40,20,0.07)",
+                  boxShadow: "0 1px 4px rgba(60,40,20,0.05)",
+                }}
+              >
+                <Icon
+                  size={26}
+                  style={{ color: "#8b1a1a" }}
+                  strokeWidth={1.4}
+                />
+                <p
+                  className="mt-3 font-semibold text-sm leading-snug"
+                  style={{ color: "#1a1410" }}
+                >
+                  {title}
+                </p>
+                <p
+                  className="mt-2 text-[12px] leading-relaxed"
+                  style={{ color: "#8a7060" }}
+                >
+                  {desc}
+                </p>
+              </div>
+            </FadeIn>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+);
+
+// ─── 5. Why Choose Us ─────────────────────────────────────────────────────────
+const WHY = [
   {
-    title: "Experience & Expertise",
-    desc: "With 20 years of experience, we have an unparalleled understanding of tandoor making rooted in generational heritage.",
+    icon: Award,
+    title: "20+ Years Experience",
+    desc: "Two decades of expertise in tandoor and kitchen equipment manufacturing.",
   },
   {
-    title: "Comprehensive Range",
-    desc: "Clay tandoors, modern cooking ranges, or fast food machinery — our diverse range caters to both small and large-scale operations.",
-  },
-  {
-    title: "Customization",
-    desc: "We offer customized solutions — our team will work with you to design equipment that fits your exact specifications.",
-  },
-  {
-    title: "Trusted by Many",
-    desc: "A loyal and growing customer base built on years of delivering quality, reliability, and exceptional service.",
-  },
-  {
-    title: "Ancestral Legacy",
-    desc: "Our ancestors pioneered tandoor making in India. That generational craftsmanship is reflected in every product we build.",
-  },
-  {
+    icon: Globe,
     title: "Export Ready",
-    desc: "We handle all export documentation and logistics, ensuring your order reaches any corner of the world safely.",
+    desc: "Proudly serving customers in 30+ countries across the globe.",
+  },
+  {
+    icon: Settings,
+    title: "Custom Solutions",
+    desc: "Tailor-made equipment built to match your exact requirements.",
+  },
+  {
+    icon: Shield,
+    title: "Certified Quality",
+    desc: "Manufactured to international standards with strict quality control.",
   },
 ];
 
-export default function AboutPage() {
-  const heroRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: heroRef,
-    offset: ["start start", "end start"],
-  });
-  const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+const WhyChooseUs = () => (
+  <section className="py-12 md:py-16" style={{ background: "#ffffff" }}>
+    <div className="container-site">
+      <FadeIn className="text-center mb-8">
+        <SectionLabel>Why Businesses Choose Us</SectionLabel>
+        <h2
+          className="font-serif font-bold"
+          style={{
+            color: "#1a1410",
+            fontSize: "clamp(1.6rem,2.8vw,2.6rem)",
+            letterSpacing: "-0.02em",
+          }}
+        >
+          Trusted by Businesses Worldwide
+        </h2>
+      </FadeIn>
 
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {WHY.map(({ icon: Icon, title, desc }, i) => (
+          <FadeIn key={title} delay={i * 0.07}>
+            <div
+              className="h-full rounded-xl p-5 border"
+              style={{
+                background: "#faf9f6",
+                borderColor: "rgba(60,40,20,0.07)",
+              }}
+            >
+              <div
+                className="w-10 h-10 rounded-full flex items-center justify-center mb-4"
+                style={{ background: "rgba(139,26,26,0.06)" }}
+              >
+                <Icon
+                  size={18}
+                  style={{ color: "#8b1a1a" }}
+                  strokeWidth={1.6}
+                />
+              </div>
+              <p
+                className="font-semibold text-sm mb-2"
+                style={{ color: "#1a1410" }}
+              >
+                — {title}
+              </p>
+              <p
+                className="text-xs leading-relaxed"
+                style={{ color: "#8a7060" }}
+              >
+                {desc}
+              </p>
+            </div>
+          </FadeIn>
+        ))}
+      </div>
+    </div>
+  </section>
+);
+
+// ─── 6. Global Presence ───────────────────────────────────────────────────────
+const COUNTRIES = [
+  { flag: "🇺🇸", name: "USA" },
+  { flag: "🇬🇧", name: "UK" },
+  { flag: "🇦🇪", name: "UAE" },
+  { flag: "🇸🇦", name: "Saudi Arabia" },
+  { flag: "🇶🇦", name: "Qatar" },
+  { flag: "🇴🇲", name: "Oman" },
+  { flag: "🇨🇦", name: "Canada" },
+  { flag: "🇦🇺", name: "Australia" },
+  { flag: "🇩🇪", name: "Germany" },
+  { flag: "🇫🇷", name: "France" },
+];
+
+const GlobalPresence = () => (
+  <section className="py-12 md:py-16" style={{ background: "#f5f2ee" }}>
+    <div className="container-site">
+      <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-8 md:gap-12 items-center">
+        {/* World map placeholder */}
+        <FadeIn>
+          <div
+            className="rounded-xl overflow-hidden w-full"
+            style={{ aspectRatio: "16/9", background: "#ede8e2" }}
+          >
+            <img
+              src="/world-map.png"
+              alt="Export map"
+              className="w-full h-full object-cover opacity-80"
+              loading="lazy"
+            />
+          </div>
+        </FadeIn>
+
+        <FadeIn delay={0.1}>
+          <SectionLabel>Global Presence</SectionLabel>
+          <h2
+            className="font-serif font-bold leading-tight"
+            style={{
+              color: "#1a1410",
+              fontSize: "clamp(1.8rem,3vw,2.8rem)",
+              letterSpacing: "-0.02em",
+            }}
+          >
+            Exporting to <span style={{ color: "#8b1a1a" }}>30+ Countries</span>
+            <br />
+            Worldwide
+          </h2>
+
+          <div className="mt-5 flex flex-wrap gap-2">
+            {COUNTRIES.map((c) => (
+              <span
+                key={c.name}
+                className="inline-flex items-center gap-1.5 text-[12px] font-medium px-2.5 py-1.5 rounded-lg"
+                style={{
+                  background: "#ffffff",
+                  border: "1px solid rgba(60,40,20,0.08)",
+                  color: "#3d2b1f",
+                }}
+              >
+                <span className="text-sm">{c.flag}</span> {c.name}
+              </span>
+            ))}
+          </div>
+
+          <button
+            className="mt-5 inline-flex items-center gap-2 px-5 py-2.5 text-xs font-semibold uppercase tracking-wider rounded-lg border transition-colors duration-200"
+            style={{
+              borderColor: "#8b1a1a",
+              color: "#8b1a1a",
+              background: "transparent",
+            }}
+          >
+            + 20 More Countries
+          </button>
+        </FadeIn>
+      </div>
+    </div>
+  </section>
+);
+
+// ─── 7. Leadership ────────────────────────────────────────────────────────────
+const TEAM = [
+  {
+    img: "/team-rajesh.jpg",
+    name: "Rajesh Kumar",
+    role: "Founder & Owner",
+    desc: "With over 20+ years of experience, he leads the company with a vision of quality, innovation and customer satisfaction.",
+  },
+  {
+    img: "/team-pratyaksh.jpg",
+    name: "Pratyaksh",
+    role: "Director",
+    desc: "Overseeing operations, exports and business development to deliver the best solutions to our global clients.",
+  },
+];
+
+const Leadership = () => (
+  <section className="py-12 md:py-16" style={{ background: "#ffffff" }}>
+    <div className="container-site">
+      <FadeIn className="text-center mb-8">
+        <SectionLabel>Leadership</SectionLabel>
+        <h2
+          className="font-serif font-bold"
+          style={{
+            color: "#1a1410",
+            fontSize: "clamp(1.6rem,2.8vw,2.6rem)",
+            letterSpacing: "-0.02em",
+          }}
+        >
+          The People Behind A-One Tandoor
+        </h2>
+      </FadeIn>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-3xl mx-auto">
+        {TEAM.map(({ img, name, role, desc }, i) => (
+          <FadeIn key={name} delay={i * 0.1}>
+            <div
+              className="flex items-start gap-4 p-5 rounded-xl border"
+              style={{
+                background: "#faf9f6",
+                borderColor: "rgba(60,40,20,0.07)",
+              }}
+            >
+              <div
+                className="shrink-0 w-16 h-16 rounded-xl overflow-hidden"
+                style={{ background: "#ede8e2" }}
+              >
+                <img
+                  src={img}
+                  alt={name}
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                />
+              </div>
+              <div>
+                <p
+                  className="font-semibold text-sm"
+                  style={{ color: "#1a1410" }}
+                >
+                  {name}
+                </p>
+                <p
+                  className="text-xs font-medium mt-0.5"
+                  style={{ color: "#8b1a1a" }}
+                >
+                  {role}
+                </p>
+                <p
+                  className="mt-2 text-xs leading-relaxed"
+                  style={{ color: "#8a7060" }}
+                >
+                  {desc}
+                </p>
+              </div>
+            </div>
+          </FadeIn>
+        ))}
+      </div>
+    </div>
+  </section>
+);
+
+// ─── 8. Certifications ────────────────────────────────────────────────────────
+const Certifications = () => (
+  <section className="py-10 md:py-12" style={{ background: "#f5f2ee" }}>
+    <div className="container-site">
+      <div className="flex flex-col md:flex-row md:items-center gap-6 md:gap-10">
+        <FadeIn className="shrink-0">
+          <SectionLabel>Trusted &amp; Certified</SectionLabel>
+          <h2
+            className="font-serif font-bold leading-tight"
+            style={{
+              color: "#1a1410",
+              fontSize: "clamp(1.4rem,2.4vw,2.2rem)",
+              letterSpacing: "-0.02em",
+            }}
+          >
+            Our Certifications
+            <br />
+            &amp; Recognitions
+          </h2>
+        </FadeIn>
+
+        <FadeIn
+          delay={0.1}
+          className="flex flex-wrap items-center gap-4 md:gap-6"
+        >
+          {[
+            { label: "ISO 9001:2015 Certified", badge: "ISO" },
+            { label: "CE Certified", badge: "CE" },
+            { label: "IEC Registered Exporter", badge: "IEC" },
+          ].map(({ label, badge }) => (
+            <div
+              key={badge}
+              className="flex flex-col items-center gap-1.5 px-5 py-4 rounded-xl border text-center"
+              style={{
+                background: "#ffffff",
+                borderColor: "rgba(60,40,20,0.08)",
+                minWidth: "90px",
+              }}
+            >
+              <span className="font-bold text-xl" style={{ color: "#1a1410" }}>
+                {badge}
+              </span>
+              <span
+                className="text-[10px] leading-snug"
+                style={{ color: "#8a7060" }}
+              >
+                {label}
+              </span>
+            </div>
+          ))}
+
+          <Link
+            to="/certifications"
+            className="ml-auto inline-flex items-center justify-center px-5 py-3 text-xs font-semibold uppercase tracking-wider rounded-lg transition-colors duration-200"
+            style={{ background: "#7a1b1a", color: "#fffaf7" }}
+          >
+            View All Certifications
+          </Link>
+        </FadeIn>
+      </div>
+    </div>
+  </section>
+);
+
+// ─── Page export ──────────────────────────────────────────────────────────────
+export default function AboutPage() {
   return (
     <main>
-      {/* ── HERO ─────────────────────────────────────────── */}
-      <section
-        ref={heroRef}
-        className="relative h-[70vh] min-h-[500px] overflow-hidden flex items-center"
-      >
-        <motion.div style={{ y: bgY }} className="absolute inset-0 scale-110">
-          <div className="w-full h-full bg-gradient-to-br from-charcoal via-brand-dark to-charcoal-light">
-            <div className="absolute inset-0 bg-charcoal/60" />
-            <div className="absolute bottom-1/3 left-1/3 w-96 h-64 rounded-full bg-brand/10 blur-3xl" />
-          </div>
-        </motion.div>
-        <div className="container-site relative z-10 pt-20">
-          <FadeIn>
-            <p className="section-label text-white/40 mb-4">Who We Are</p>
-          </FadeIn>
-          <RevealText>
-            <h1 className="section-heading text-white max-w-2xl">
-              20+ Years of{" "}
-              <em className="text-brand not-italic">Tandoor Mastery</em>
-            </h1>
-          </RevealText>
-          <FadeIn delay={0.4}>
-            <p className="mt-5 text-white/50 max-w-lg leading-relaxed">
-              From a workshop in New Delhi to kitchens across 30+ countries — a
-              legacy of craft passed down through generations, built on fire,
-              tradition, and uncompromising quality.
-            </p>
-          </FadeIn>
-        </div>
-      </section>
-
-      {/* ── WELCOME / OUR STORY ──────────────────────────── */}
-      <section className="py-24 md:py-32 bg-clay-50">
-        {/* <div className="container-site">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
-            <FadeIn direction="right">
-              <div className="relative">
-                <div className="aspect-[4/5] bg-gradient-to-br from-clay-200 to-clay-300 overflow-hidden">
-                  <div className="absolute left-0 top-0 bottom-0 w-1 bg-brand" />
-                </div>
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.4, duration: 0.6 }}
-                  className="absolute -bottom-8 -right-6 bg-charcoal p-6 shadow-2xl"
-                >
-                  <p className="font-display text-4xl font-bold text-brand">
-                    24+
-                  </p>
-                  <p className="text-xs text-white/50 uppercase tracking-widest mt-1">
-                    Years of Craft
-                  </p>
-                </motion.div>
-              </div>
-            </FadeIn>
-
-            <div className="lg:pt-0 pt-8">
-              <FadeIn>
-                <p className="section-label mb-4">Our Story</p>
-              </FadeIn>
-              <RevealText delay={0.1}>
-                <h2 className="section-subheading mb-6">
-                  Welcome to
-                  <br />
-                  <em className="text-brand not-italic">A-One Tandoors</em>
-                </h2>
-              </RevealText>
-              <FadeIn delay={0.2}>
-                <p className="text-charcoal-soft leading-relaxed mb-4">
-                  We are a leading manufacturer and exporter of high-quality
-                  kitchen equipment, specializing in tandoors and clay products.
-                  Based in Delhi, India, we have been serving our customers for
-                  the past 24 years with dedication and excellence.
-                </p>
-              </FadeIn>
-              <FadeIn delay={0.3}>
-                <p className="text-charcoal-soft leading-relaxed mb-4">
-                  Our company has a rich heritage in tandoor making — a craft
-                  passed down from our ancestors who were pioneers in
-                  introducing tandoors to India. That generational wisdom is
-                  reflected in every product we build.
-                </p>
-              </FadeIn>
-              <FadeIn delay={0.4}>
-                <p className="text-charcoal-soft leading-relaxed">
-                  From a modest workshop in New Delhi to kitchens across 30+
-                  countries, A-One Tandoors stands as a testament to tradition
-                  meeting innovation.
-                </p>
-              </FadeIn>
-              <FadeIn delay={0.5}>
-                <div className="mt-10 pt-8 border-t border-clay-200 flex flex-wrap gap-6">
-                  {["NSF Certified", "ISO 9001", "BIS Approved"].map((cert) => (
-                    <div key={cert} className="flex items-center gap-2">
-                      <div className="w-1.5 h-1.5 rounded-full bg-brand" />
-                      <span className="text-sm text-charcoal font-medium">
-                        {cert}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </FadeIn>
-            </div>
-          </div>
-        </div> */}
-
-        <div className="container-site">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-0 items-stretch">
-            {/* ── LEFT — Image Column (5 cols) ── */}
-            <FadeIn direction="right" className="lg:col-span-5">
-              <div className="relative h-full min-h-[520px]">
-                {/* Main image */}
-                <div className="absolute inset-0 bg-gradient-to-br from-clay-200 to-clay-300 overflow-hidden">
-                  {/* Replace with <img> when ready */}
-                  {/* Vertical brand stripe — left edge */}
-                  <div className="absolute left-0 top-0 bottom-0 w-[3px] bg-brand" />
-                  {/* Diagonal texture overlay */}
-                  <div
-                    className="absolute inset-0 opacity-[0.04]"
-                    style={{
-                      backgroundImage:
-                        "repeating-linear-gradient(45deg, #1a1a1a 0, #1a1a1a 1px, transparent 0, transparent 50%)",
-                      backgroundSize: "12px 12px",
-                    }}
-                  />
-                </div>
-
-                {/* Floating year badge — bottom right, bleeds out */}
-                <motion.div
-                  initial={{ opacity: 0, y: 16 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.5, duration: 0.5, ease: "easeOut" }}
-                  className="absolute -bottom-6 -right-5 lg:-right-10 bg-charcoal px-7 py-6 z-10"
-                >
-                  <p className="font-display text-5xl font-semibold text-brand leading-none">
-                    20+
-                  </p>
-                  <p className="text-[10px] uppercase tracking-ultra text-white/40 mt-2">
-                    Years of Craft
-                  </p>
-                </motion.div>
-
-                {/* Floating origin tag — top left corner */}
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.7, duration: 0.5 }}
-                  className="absolute top-6 left-6 flex items-center gap-2"
-                >
-                  <div className="w-1.5 h-1.5 rounded-full bg-brand animate-pulse" />
-                  <span className="text-[10px] uppercase tracking-ultra text-charcoal/50 bg-white/80 px-3 py-1">
-                    New Delhi, India
-                  </span>
-                </motion.div>
-              </div>
-            </FadeIn>
-
-            {/* ── Vertical Divider (1 col) ── */}
-            <div className="hidden lg:flex lg:col-span-1 justify-center pt-10 pb-10">
-              <div className="w-px bg-clay-200 h-full" />
-            </div>
-
-            {/* ── RIGHT — Content Column (6 cols) ── */}
-            <div className="lg:col-span-6 lg:pl-10 pt-14 lg:pt-0 flex flex-col justify-center">
-              {/* Label */}
-              <FadeIn>
-                <div className="flex items-center gap-3 mb-8">
-                  <div className="w-5 h-px bg-brand" />
-                  <p className="section-label">Our Story</p>
-                </div>
-              </FadeIn>
-
-              {/* Heading — two visual weights */}
-              <RevealText delay={0.1}>
-                <h2 className="font-display leading-[1.08] text-charcoal mb-10">
-                  <span className="block text-[2.6rem] md:text-[3.2rem] font-light tracking-tight text-charcoal/40">
-                    Twenty+ years of
-                  </span>
-                  <span className="block text-[2.8rem] md:text-[3.6rem] font-semibold">
-                    craft, fire
-                  </span>
-                  <span className="block text-[2.8rem] md:text-[3.6rem] font-semibold text-brand">
-                    & trust.
-                  </span>
-                </h2>
-              </RevealText>
-
-              {/* Pull quote */}
-              <FadeIn delay={0.2}>
-                <div className="border-l-[2px] border-brand pl-5 mb-10">
-                  <p className="text-base md:text-lg font-display italic text-charcoal/70 leading-snug">
-                    "A heritage passed down through generations — the same hands
-                    that pioneered the tandoor in India now serve kitchens
-                    across 30+ countries."
-                  </p>
-                </div>
-              </FadeIn>
-
-              {/* Body */}
-              <FadeIn delay={0.3}>
-                <p className="text-[13.5px] text-charcoal/55 leading-[1.95] mb-4 max-w-[420px]">
-                  Based in New Delhi, we manufacture and export premium tandoors
-                  and clay kitchen equipment — built by craftsmen who treat each
-                  unit as a signature, not a product off a line.
-                </p>
-              </FadeIn>
-
-              <FadeIn delay={0.35}>
-                <p className="text-[13.5px] text-charcoal/55 leading-[1.95] mb-12 max-w-[420px]">
-                  From a modest workshop to professional kitchens worldwide,
-                  every tandoor carries the weight of generational knowledge —
-                  refined over decades, never mass-produced.
-                </p>
-              </FadeIn>
-
-              {/* Certifications */}
-              <FadeIn delay={0.45}>
-                <div className="border-t border-clay-200 pt-8">
-                  <p className="text-[10px] uppercase tracking-ultra text-charcoal/25 mb-6">
-                    Certifications & Standards
-                  </p>
-                  <div className="flex flex-wrap gap-x-8 gap-y-4">
-                    {[
-                      { label: "NSF Certified", sub: "Food Safety" },
-                      { label: "ISO 9001", sub: "Quality Mgmt." },
-                      { label: "BIS Approved", sub: "Indian Standard" },
-                    ].map((cert) => (
-                      <div
-                        key={cert.label}
-                        className="group flex flex-col gap-1"
-                      >
-                        <div className="flex items-center gap-2">
-                          <div className="w-[5px] h-[5px] bg-brand rotate-45 shrink-0" />
-                          <span className="text-sm font-semibold text-charcoal">
-                            {cert.label}
-                          </span>
-                        </div>
-                        <span className="text-[10px] uppercase tracking-ultra text-charcoal/30 pl-[18px]">
-                          {cert.sub}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </FadeIn>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── STATS BAND ───────────────────────────────────── */}
-      <section className="py-20 bg-brand">
-        <div className="container-site">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
-            {STATS.map(([num, label], i) => (
-              <FadeIn key={label} delay={i * 0.1}>
-                <div className="text-center">
-                  <p className="font-display text-4xl md:text-5xl font-bold text-white">
-                    {num}
-                  </p>
-                  <p className="text-xs text-white/60 uppercase tracking-widest mt-2">
-                    {label}
-                  </p>
-                </div>
-              </FadeIn>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── OUR EXPERTISE ────────────────────────────────── */}
-      <section className="py-24 md:py-32 bg-beige-warm">
-        <div className="container-site">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div>
-              <FadeIn>
-                <p className="section-label mb-4">Our Expertise</p>
-              </FadeIn>
-              <RevealText delay={0.1}>
-                <h2 className="section-subheading mb-6">
-                  Built for Every
-                  <br />
-                  <em className="text-brand not-italic">Kitchen Need</em>
-                </h2>
-              </RevealText>
-              <FadeIn delay={0.2}>
-                <p className="text-charcoal-soft leading-relaxed mb-4">
-                  At A-One Tandoors, we pride ourselves on our extensive range
-                  of kitchen equipment designed to meet the diverse needs of our
-                  clients — from home kitchens to large commercial operations.
-                </p>
-              </FadeIn>
-              <FadeIn delay={0.3}>
-                <p className="text-charcoal-soft leading-relaxed mb-10">
-                  Our product portfolio spans tandoors, cooking ranges, fast
-                  food machinery, and catering equipment — each built with a
-                  focus on efficiency, safety, and durability.
-                </p>
-              </FadeIn>
-              <FadeIn delay={0.4}>
-                <Link to="/products/home-tandoors" className="btn-primary">
-                  Explore Our Products
-                </Link>
-              </FadeIn>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              {EXPERTISE.map((v, i) => (
-                <FadeIn key={v.title} delay={0.1 + i * 0.09}>
-                  <div className="group p-6 bg-white border border-clay-200 hover:border-brand/30 hover:shadow-lg hover:shadow-brand/5 transition-all duration-400">
-                    <div className="divider-brand mb-4 transition-all duration-500 group-hover:w-10" />
-                    <h3 className="font-display text-base text-charcoal mb-2">
-                      {v.title}
-                    </h3>
-                    <p className="text-sm text-charcoal-soft leading-relaxed">
-                      {v.desc}
-                    </p>
-                  </div>
-                </FadeIn>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── OUR LEGACY ───────────────────────────────────── */}
-      <section className="py-24 md:py-32 bg-charcoal overflow-hidden">
-        <div className="container-site">
-          <div className="text-center mb-16">
-            <FadeIn>
-              <p className="section-label text-white/40 mb-3">Our Journey</p>
-            </FadeIn>
-            <RevealText>
-              <h2 className="section-heading text-white">
-                Key <em className="text-brand not-italic">Milestones</em>
-              </h2>
-            </RevealText>
-            <FadeIn delay={0.2}>
-              <p className="mt-5 text-white/50 max-w-xl mx-auto leading-relaxed">
-                The art of tandoor making is deeply rooted in our family
-                history. Our ancestors were pioneers in introducing tandoors to
-                India — a rich tradition reflected in every product we make.
-              </p>
-            </FadeIn>
-          </div>
-
-          {/* Timeline */}
-          <div className="relative max-w-4xl mx-auto">
-            <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-px bg-white/10 hidden lg:block" />
-            <div className="flex flex-col gap-0">
-              {MILESTONES.map((m, i) => {
-                const isLeft = i % 2 === 0;
-                return (
-                  <FadeIn key={m.year + m.title} delay={i * 0.08}>
-                    <div
-                      className={`relative grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-0 py-10 ${
-                        isLeft ? "" : "lg:flex-row-reverse"
-                      }`}
-                    >
-                      <div
-                        className={`${isLeft ? "lg:pr-16 lg:text-right" : "lg:col-start-2 lg:pl-16"} flex flex-col ${isLeft ? "lg:items-end" : "lg:items-start"}`}
-                      >
-                        <span className="font-display text-5xl font-bold text-brand/30 leading-none">
-                          {m.year}
-                        </span>
-                        <h3 className="font-display text-xl text-white mt-1">
-                          {m.title}
-                        </h3>
-                        <p className="text-white/50 mt-2 text-sm leading-relaxed max-w-xs">
-                          {m.desc}
-                        </p>
-                      </div>
-                      <div className="hidden lg:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 items-center justify-center">
-                        <motion.div
-                          initial={{ scale: 0 }}
-                          whileInView={{ scale: 1 }}
-                          viewport={{ once: true }}
-                          transition={{ duration: 0.4, delay: i * 0.08 }}
-                          className="w-4 h-4 rounded-full bg-brand border-4 border-charcoal ring-1 ring-brand/40"
-                        />
-                      </div>
-                    </div>
-                  </FadeIn>
-                );
-              })}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── OUR COMMITMENT ───────────────────────────────── */}
-      <section className="py-24 md:py-32 bg-clay-50">
-        <div className="container-site">
-          <div className="text-center max-w-2xl mx-auto mb-16">
-            <FadeIn>
-              <p className="section-label mb-4">Our Commitment</p>
-            </FadeIn>
-            <RevealText>
-              <h2 className="section-heading">
-                What You Can{" "}
-                <em className="text-brand not-italic">Expect From Us</em>
-              </h2>
-            </RevealText>
-            <FadeIn delay={0.2}>
-              <p className="mt-5 text-charcoal-soft leading-relaxed">
-                We are committed to providing our customers with the best
-                products and services — from quality assurance to global
-                delivery.
-              </p>
-            </FadeIn>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {COMMITMENTS.map((item, i) => (
-              <FadeIn key={item.title} delay={i * 0.08}>
-                <div className="group p-8 bg-white border border-clay-200 hover:border-brand/30 hover:shadow-xl hover:shadow-brand/5 transition-all duration-500 h-full">
-                  <div className="text-3xl font-display font-bold text-brand/20 group-hover:text-brand/40 transition-colors mb-4 select-none">
-                    {String(i + 1).padStart(2, "0")}
-                  </div>
-                  <div className="divider-brand mb-4 transition-all duration-500 group-hover:w-10" />
-                  <h3 className="font-display text-lg text-charcoal mb-2 group-hover:text-brand transition-colors duration-300">
-                    {item.title}
-                  </h3>
-                  <p className="text-sm text-charcoal-soft leading-relaxed">
-                    {item.desc}
-                  </p>
-                </div>
-              </FadeIn>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── WHY CHOOSE US ────────────────────────────────── */}
-      <section className="py-24 md:py-32 bg-beige-warm">
-        <div className="container-site">
-          <div className="text-center max-w-2xl mx-auto mb-16">
-            <FadeIn>
-              <p className="section-label mb-4">Why Choose Us</p>
-            </FadeIn>
-            <RevealText>
-              <h2 className="section-heading">
-                Why <em className="text-brand not-italic">A-One Tandoors?</em>
-              </h2>
-            </RevealText>
-            <FadeIn delay={0.2}>
-              <p className="mt-5 text-charcoal-soft leading-relaxed">
-                A-One Tandoors is your one-stop solution for all kitchen
-                equipment needs — a blend of tradition, innovation, and
-                unmatched expertise.
-              </p>
-            </FadeIn>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {WHY_CHOOSE.map((item, i) => (
-              <FadeIn key={item.title} delay={i * 0.08}>
-                <div className="group p-8 bg-white border border-clay-200 hover:border-brand/30 hover:shadow-xl hover:shadow-brand/5 transition-all duration-500">
-                  <div className="text-3xl font-display font-bold text-brand/20 group-hover:text-brand/40 transition-colors mb-4 select-none">
-                    {String(i + 1).padStart(2, "0")}
-                  </div>
-                  <div className="divider-brand mb-4 transition-all duration-500 group-hover:w-10" />
-                  <h3 className="font-display text-lg text-charcoal mb-2 group-hover:text-brand transition-colors duration-300">
-                    {item.title}
-                  </h3>
-                  <p className="text-sm text-charcoal-soft leading-relaxed">
-                    {item.desc}
-                  </p>
-                </div>
-              </FadeIn>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── LEADERSHIP ───────────────────────────────────── */}
-      <section className="py-24 md:py-32 bg-charcoal">
-        <div className="container-site">
-          <div className="text-center mb-16">
-            <FadeIn>
-              <p className="section-label text-white/40 mb-3">Leadership</p>
-            </FadeIn>
-            <RevealText>
-              <h2 className="section-heading text-white">
-                The People{" "}
-                <em className="text-brand not-italic">Behind the Craft</em>
-              </h2>
-            </RevealText>
-          </div>
-
-          <div className="flex flex-col sm:flex-row justify-center gap-8 max-w-2xl mx-auto">
-            {[
-              { name: "Rajesh Kumar", role: "Founder & Owner" },
-              { name: "Pratyaksh", role: "Director" },
-            ].map((person, i) => (
-              <FadeIn key={person.name} delay={i * 0.15}>
-                <div className="flex-1 text-center group">
-                  <div className="w-28 h-28 mx-auto bg-gradient-to-br from-brand-dark to-charcoal-light border border-brand/20 flex items-center justify-center mb-5">
-                    <span className="font-display text-3xl font-bold text-brand/60">
-                      {person.name.charAt(0)}
-                    </span>
-                  </div>
-                  <div className="w-8 h-0.5 bg-brand mx-auto mb-4" />
-                  <h3 className="font-display text-xl text-white">
-                    {person.name}
-                  </h3>
-                  <p className="text-sm text-white/40 uppercase tracking-widest mt-1">
-                    {person.role}
-                  </p>
-                </div>
-              </FadeIn>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── CLOSING CTA ──────────────────────────────────── */}
-      <section className="py-24 bg-brand">
-        <div className="container-site text-center max-w-2xl mx-auto">
-          <RevealText>
-            <h2 className="font-display text-4xl md:text-5xl font-semibold text-white leading-tight">
-              Ready to Experience the A-One Difference?
-            </h2>
-          </RevealText>
-          <FadeIn delay={0.2}>
-            <p className="mt-5 text-white/70 leading-relaxed">
-              Browse our complete product catalogue or reach out to our team for
-              a personalised recommendation.
-            </p>
-          </FadeIn>
-          <FadeIn delay={0.3}>
-            <div className="flex flex-wrap justify-center gap-4 mt-10">
-              <Link
-                to="/products/home-tandoors"
-                className="inline-flex items-center gap-2 bg-white text-brand px-8 py-3.5 text-sm font-medium tracking-widest uppercase hover:bg-clay-100 transition-colors"
-              >
-                View Products
-              </Link>
-              <Link
-                to="/contact"
-                className="inline-flex items-center gap-2 border border-white/50 text-white px-8 py-3.5 text-sm font-medium tracking-widest uppercase hover:bg-white/10 transition-colors"
-              >
-                Contact Us
-              </Link>
-            </div>
-          </FadeIn>
-        </div>
-      </section>
+      <HeroSection />
+      <OurStory />
+      <ManufacturingSection />
+      <ExpertiseSection />
+      <WhyChooseUs />
+      <GlobalPresence />
+      <Leadership />
+      <Certifications />
+      {/* <CTABanner /> */}
     </main>
   );
 }

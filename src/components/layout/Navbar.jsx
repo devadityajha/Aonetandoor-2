@@ -3,11 +3,10 @@
 // import { motion, AnimatePresence } from "framer-motion";
 // import { ChevronDown, Menu, X } from "lucide-react";
 // import { cn } from "../../lib/utils";
-// import { style } from "framer-motion/client";
 
 // const NAV_LINKS = [
 //   { label: "Home", href: "/" },
-//   { label: "About Us", href: "/about" },
+
 //   {
 //     label: "Products",
 //     dropdown: [
@@ -28,6 +27,7 @@
 //       },
 //     ],
 //   },
+//   { label: "About Us", href: "/about" },
 //   { label: "Certifications", href: "/certifications" },
 //   { label: "Contact", href: "/contact" },
 // ];
@@ -123,9 +123,6 @@
 //     setActiveDropdown(null);
 //   }, [location]);
 
-//   const isHome = location.pathname === "/";
-//   const isVisible = !isHome || scrolled;
-
 //   useEffect(() => {
 //     const onScroll = () => setScrolled(window.scrollY > 60);
 //     window.addEventListener("scroll", onScroll, { passive: true });
@@ -133,33 +130,25 @@
 //     return () => window.removeEventListener("scroll", onScroll);
 //   }, [location.pathname]);
 
+//   // FIXED: navbar always visible (white bg + dark text) on home page too
+//   // because hero bg is off-white — transparent navbar was invisible
+//   const isVisible = true;
+
 //   return (
 //     <>
 //       <nav
 //         className={cn(
 //           "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
-//           isVisible
-//             ? "bg-white/95 backdrop-blur-md shadow-sm border-b border-clay-200/50 py-3"
-//             : "bg-transparent py-5",
+//           "bg-white/95 backdrop-blur-md shadow-sm border-b border-clay-200/50 py-3",
 //         )}
 //       >
 //         <div className="container-site flex items-center justify-between">
 //           {/* Logo */}
 //           <Link to="/" className="flex flex-col leading-none group">
-//             <span
-//               className={cn(
-//                 "font-display text-xl font-bold tracking-tight transition-colors duration-300",
-//                 isVisible ? "text-charcoal" : "text-white",
-//               )}
-//             >
+//             <span className="font-display text-xl font-bold tracking-tight transition-colors duration-300 text-charcoal">
 //               A-One Tandoor
 //             </span>
-//             <span
-//               className={cn(
-//                 "text-[9px] tracking-ultra uppercase transition-colors duration-300",
-//                 isVisible ? "text-brand" : "text-white/70",
-//               )}
-//             >
+//             <span className="text-[9px] tracking-ultra uppercase transition-colors duration-300 text-brand">
 //               Since 2005
 //             </span>
 //           </Link>
@@ -181,27 +170,16 @@
 //                     className={({ isActive }) =>
 //                       cn(
 //                         "text-sm font-medium tracking-wider uppercase transition-colors duration-200",
-//                         isVisible
-//                           ? isActive
-//                             ? "text-brand"
-//                             : "text-charcoal hover:text-brand"
-//                           : isActive
-//                             ? "text-brand-muted"
-//                             : "text-white/90 hover:text-white",
+//                         isActive
+//                           ? "text-brand"
+//                           : "text-charcoal hover:text-brand",
 //                       )
 //                     }
 //                   >
 //                     {link.label}
 //                   </NavLink>
 //                 ) : (
-//                   <button
-//                     className={cn(
-//                       "flex items-center gap-1 text-sm font-medium tracking-wider uppercase transition-colors duration-200",
-//                       isVisible
-//                         ? "text-charcoal hover:text-brand"
-//                         : "text-white/90 hover:text-white",
-//                     )}
-//                   >
+//                   <button className="flex items-center gap-1 text-sm font-medium tracking-wider uppercase transition-colors duration-200 text-charcoal hover:text-brand">
 //                     {link.label}
 //                     <ChevronDown
 //                       size={14}
@@ -250,26 +228,15 @@
 //           <div className="flex items-center gap-4">
 //             <Link
 //               to="/contact"
-//               style={{
-//                 background: "#944E4E",
-//               }}
-//               className={cn(
-//                 "hidden lg:inline-flex items-center gap-2 px-5 py-2 text-xs font-medium tracking-widest uppercase border transition-all duration-300",
-
-//                 // isVisible
-//                 //   ? "border-brand text-brand hover:bg-brand hover:text-white"
-//                 //   : "border-white/60 text-white hover:bg-white hover:text-charcoal",
-//               )}
+//               style={{ background: "#944E4E" }}
+//               className="hidden lg:inline-flex items-center gap-2 px-5 py-2 text-xs font-medium tracking-widest uppercase text-white border border-transparent transition-all duration-300 hover:opacity-90"
 //             >
 //               Get a Quote
 //             </Link>
 
 //             <button
 //               onClick={() => setMobileOpen(!mobileOpen)}
-//               className={cn(
-//                 "lg:hidden p-2 transition-colors",
-//                 isVisible ? "text-charcoal" : "text-white",
-//               )}
+//               className="lg:hidden p-2 transition-colors text-charcoal"
 //               aria-label="Toggle menu"
 //             >
 //               {mobileOpen ? <X size={22} /> : <Menu size={22} />}
@@ -397,7 +364,7 @@ import { cn } from "../../lib/utils";
 
 const NAV_LINKS = [
   { label: "Home", href: "/" },
-  { label: "About Us", href: "/about" },
+
   {
     label: "Products",
     dropdown: [
@@ -418,6 +385,7 @@ const NAV_LINKS = [
       },
     ],
   },
+  { label: "About Us", href: "/about" },
   { label: "Certifications", href: "/certifications" },
   { label: "Contact", href: "/contact" },
 ];
@@ -533,14 +501,13 @@ export default function Navbar() {
         )}
       >
         <div className="container-site flex items-center justify-between">
-          {/* Logo */}
-          <Link to="/" className="flex flex-col leading-none group">
-            <span className="font-display text-xl font-bold tracking-tight transition-colors duration-300 text-charcoal">
-              A-One Tandoor
-            </span>
-            <span className="text-[9px] tracking-ultra uppercase transition-colors duration-300 text-brand">
-              Since 2005
-            </span>
+          {/* Logo - Updated to image */}
+          <Link to="/" className="flex items-center group">
+            <img
+              src="/aonetandoorlogo.png"
+              alt="A-One Tandoor Logo"
+              className="h-10 md:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+            />
           </Link>
 
           {/* Desktop Nav */}

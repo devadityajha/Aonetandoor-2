@@ -8,50 +8,53 @@ const CATEGORIES = [
   {
     label: "Home Tandoors",
     slug: "home-tandoors",
-    desc: "Compact and efficient designs for modern home kitchens.",
-    image: "/products/home-tandoors.png",
+    // desc: "Compact and efficient designs for modern home kitchens.",
+    image: "hometandoor.png",
   },
   {
     label: "Restaurant Tandoors",
     slug: "restaurant-tandoors",
-    desc: "Heavy-duty tandoors designed for high-volume commercial kitchens.",
-    image: "/products/restaurant-tandoors.png",
+    // desc: "Heavy-duty tandoors designed for high-volume commercial kitchens.",
+    image: "restrauranttandoor.png",
   },
   {
     label: "Premium Tandoors",
     slug: "premium-tandoors",
-    desc: "Top-tier craftsmanship for the most demanding culinary standards.",
-    image: "/products/premium-tandoors.png",
+    // desc: "Top-tier craftsmanship for the most demanding culinary standards.",
+    image: "premiumtandoor.png",
   },
   {
     label: "Pizza Oven",
     slug: "Pizza Oven",
-    desc: "Wood-fired and gas pizza ovens for authentic crispy results.",
-    image: "/products/pizza-oven.png",
+    // desc: "Wood-fired and gas pizza ovens for authentic crispy results.",
+    image: "pizzaoven.png",
   },
+
+  // Copper ki image thi hi nahi, utensils ki thi, isiliye utensils se replace kr rhaa hu copper ko
   {
     label: "Copper Tandoor",
     slug: "copper-tandoors",
-    desc: "Traditional handcrafted tandoors with premium copper finish.",
-    image: "/products/copper-tandoors.png",
+    // desc: "Traditional handcrafted tandoors with premium copper finish.",
+    image: "utensils.png",
   },
+
   {
     label: "Export Tandoors",
     slug: "export-tandoors",
-    desc: "Export-grade tandoors built to international quality standards.",
-    image: "/products/export-tandoors.png",
+    // desc: "Export-grade tandoors built to international quality standards.",
+    image: "exporttandoor.png",
   },
   {
     label: "Electric Tandoors",
     slug: "electric-tandoors",
-    desc: "Modern electric tandoors — no gas, no smoke, pure performance.",
-    image: "/products/electric-tandoors.png",
+    // desc: "Modern electric tandoors — no gas, no smoke, pure performance.",
+    image: "electrictandoor.png",
   },
   {
     label: "Accessories",
     slug: "accessories",
-    desc: "Essential tools and add-ons to enhance your cooking experience.",
-    image: "/products/accessories.png",
+    // desc: "Essential tools and add-ons to enhance your cooking experience.",
+    image: "accessories.png",
   },
 ];
 
@@ -62,11 +65,6 @@ export default function CategoriesSection() {
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-6">
           <div>
-            <FadeIn>
-              <p className="section-label mb-5" style={{ color: "#8b1a1a" }}>
-                What We Offer
-              </p>
-            </FadeIn>
             <RevealText>
               <h2 className="section-heading" style={{ color: "#1a1410" }}>
                 Our Product{" "}
@@ -170,12 +168,12 @@ export default function CategoriesSection() {
                     {cat.label}
                   </h3>
 
-                  <p
+                  {/* <p
                     className="text-xs leading-relaxed line-clamp-2 hidden md:block"
                     style={{ color: "#8a7060" }}
                   >
                     {cat.desc}
-                  </p>
+                  </p> */}
 
                   {/* Explore link */}
                   <div

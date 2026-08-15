@@ -12,11 +12,13 @@ import GlobalExportSection from "../components/home/GlobalExportSection";
 import BrandsSection from "../components/home/BrandsSection";
 import IndustriesSection from "../components/home/IndustriesSection";
 import InstagramFeedSection from "../components/home/InstagramFeedSection";
+// import { TrustBar } from "../components/home/TrustBar";
 
 export default function HomePage() {
   return (
     <main>
       <HeroSection />
+      {/* <TrustBar /> */}
       <CategoriesSection />
       <FeaturedProductsSection />
       <WhyChooseSection />

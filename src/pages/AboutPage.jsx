@@ -204,31 +204,31 @@ const OurStory = () => (
 // ─── 3. Manufacturing Facility ────────────────────────────────────────────────
 const FACILITY = [
   {
-    img: "/facility-1.jpg",
+    img: "/advancedMachinery.png",
     icon: Settings,
     title: "Advanced Machinery",
     desc: "Modern equipment for precision engineering",
   },
   {
-    img: "/facility-2.jpg",
+    img: "/skilled.png",
     icon: Users,
     title: "Skilled Craftsmen",
     desc: "Experienced team with generational expertise",
   },
   {
-    img: "/facility-3.jpg",
+    img: "/quality.png",
     icon: Shield,
     title: "Quality Inspection",
     desc: "Rigorous testing at every stage of production",
   },
   {
-    img: "/facility-4.jpg",
+    img: "/export.png",
     icon: Box,
     title: "Export Packaging",
     desc: "Secure packaging for safe international delivery",
   },
   {
-    img: "/facility-5.jpg",
+    img: "/custom.png",
     icon: Wrench,
     title: "Custom Manufacturing",
     desc: "Tailor-made solutions as per client requirements",
@@ -239,7 +239,11 @@ const ManufacturingSection = () => (
   <section className="py-12 md:py-16" style={{ background: "#ffffff" }}>
     <div className="container-site">
       <FadeIn className="text-center mb-8">
-        <SectionLabel>Manufacturing Facility</SectionLabel>
+        {/* Added flex and justify-center wrapper here */}
+        <div className="flex justify-center mb-3">
+          <SectionLabel>Manufacturing Facility</SectionLabel>
+        </div>
+
         <h2
           className="font-serif font-bold"
           style={{
@@ -300,6 +304,7 @@ const ManufacturingSection = () => (
 );
 
 // ─── 4. Expertise ────────────────────────────────────────────────────────────
+
 const EXPERTISE = [
   {
     icon: ChefHat,
@@ -323,11 +328,77 @@ const EXPERTISE = [
   },
 ];
 
+// const ExpertiseSection = () => (
+//   <section className="py-12 md:py-16" style={{ background: "#f5f2ee" }}>
+//     <div className="container-site">
+//       <div className="grid lg:grid-cols-[1fr_2fr] gap-8 md:gap-12 items-start">
+//         <FadeIn>
+//           <SectionLabel>Our Expertise</SectionLabel>
+//           <h2
+//             className="font-serif font-bold leading-tight"
+//             style={{
+//               color: "#1a1410",
+//               fontSize: "clamp(1.8rem,3vw,2.8rem)",
+//               letterSpacing: "-0.02em",
+//             }}
+//           >
+//             Manufacturing Solutions For{" "}
+//             <span style={{ color: "#8b1a1a" }}>Every Kitchen</span>
+//           </h2>
+//           <p
+//             className="mt-4 text-sm leading-relaxed"
+//             style={{ color: "#5c4a3a" }}
+//           >
+//             From clay tandoors to commercial kitchen equipment, we offer a wide
+//             range of solutions for all types of food businesses.
+//           </p>
+//         </FadeIn>
+
+//         <div className="grid grid-cols-2 gap-3 md:gap-4">
+//           {EXPERTISE.map(({ icon: Icon, title, desc }, i) => (
+//             <FadeIn key={title} delay={i * 0.07}>
+//               <div
+//                 className="h-full rounded-xl p-4 md:p-5 border"
+//                 style={{
+//                   background: "#ffffff",
+//                   borderColor: "rgba(60,40,20,0.07)",
+//                   boxShadow: "0 1px 4px rgba(60,40,20,0.05)",
+//                 }}
+//               >
+//                 <Icon
+//                   size={26}
+//                   style={{ color: "#8b1a1a" }}
+//                   strokeWidth={1.4}
+//                 />
+//                 <p
+//                   className="mt-3 font-semibold text-sm leading-snug"
+//                   style={{ color: "#1a1410" }}
+//                 >
+//                   {title}
+//                 </p>
+//                 <p
+//                   className="mt-2 text-[12px] leading-relaxed"
+//                   style={{ color: "#8a7060" }}
+//                 >
+//                   {desc}
+//                 </p>
+//               </div>
+//             </FadeIn>
+//           ))}
+//         </div>
+//       </div>
+//     </div>
+//   </section>
+// );
+
+// ─── 5. Why Choose Us ─────────────────────────────────────────────────────────
+
 const ExpertiseSection = () => (
   <section className="py-12 md:py-16" style={{ background: "#f5f2ee" }}>
     <div className="container-site">
-      <div className="grid lg:grid-cols-[1fr_2fr] gap-8 md:gap-12 items-start">
-        <FadeIn>
+      {/* Changed layout: Text on top, boxes in a full-width row below */}
+      <div className="flex flex-col gap-8 md:gap-10">
+        <FadeIn className="max-w-2xl">
           <SectionLabel>Our Expertise</SectionLabel>
           <h2
             className="font-serif font-bold leading-tight"
@@ -349,11 +420,17 @@ const ExpertiseSection = () => (
           </p>
         </FadeIn>
 
-        <div className="grid grid-cols-2 gap-3 md:gap-4">
+        {/*
+          CHANGED: Responsive horizontal line
+          Mobile: 1 column
+          Tablet: 2 columns
+          Desktop: 4 columns (One single horizontal line)
+        */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
           {EXPERTISE.map(({ icon: Icon, title, desc }, i) => (
             <FadeIn key={title} delay={i * 0.07}>
               <div
-                className="h-full rounded-xl p-4 md:p-5 border"
+                className="h-full w-full rounded-xl p-5 md:p-6 border"
                 style={{
                   background: "#ffffff",
                   borderColor: "rgba(60,40,20,0.07)",
@@ -361,18 +438,18 @@ const ExpertiseSection = () => (
                 }}
               >
                 <Icon
-                  size={26}
+                  size={28}
                   style={{ color: "#8b1a1a" }}
                   strokeWidth={1.4}
                 />
                 <p
-                  className="mt-3 font-semibold text-sm leading-snug"
+                  className="mt-4 font-semibold text-sm md:text-base leading-snug"
                   style={{ color: "#1a1410" }}
                 >
                   {title}
                 </p>
                 <p
-                  className="mt-2 text-[12px] leading-relaxed"
+                  className="mt-2 text-[13px] leading-relaxed"
                   style={{ color: "#8a7060" }}
                 >
                   {desc}
@@ -386,7 +463,6 @@ const ExpertiseSection = () => (
   </section>
 );
 
-// ─── 5. Why Choose Us ─────────────────────────────────────────────────────────
 const WHY = [
   {
     icon: Award,
@@ -414,7 +490,9 @@ const WhyChooseUs = () => (
   <section className="py-12 md:py-16" style={{ background: "#ffffff" }}>
     <div className="container-site">
       <FadeIn className="text-center mb-8">
-        <SectionLabel>Why Businesses Choose Us</SectionLabel>
+        <div className="flex justify-center mb-3">
+          <SectionLabel>Why Businesses Choose Us</SectionLabel>
+        </div>
         <h2
           className="font-serif font-bold"
           style={{
@@ -427,34 +505,36 @@ const WhyChooseUs = () => (
         </h2>
       </FadeIn>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      {/* 4 columns side-by-side on desktop to make the boxes narrow and tall */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
         {WHY.map(({ icon: Icon, title, desc }, i) => (
           <FadeIn key={title} delay={i * 0.07}>
             <div
-              className="h-full rounded-xl p-5 border"
+              className="h-full rounded-xl p-6 md:p-8 border flex flex-col"
               style={{
                 background: "#faf9f6",
                 borderColor: "rgba(60,40,20,0.07)",
+                minHeight: "280px", // Forces the vertical rectangle shape
               }}
             >
               <div
-                className="w-10 h-10 rounded-full flex items-center justify-center mb-4"
+                className="w-12 h-12 rounded-full flex items-center justify-center mb-5 shrink-0"
                 style={{ background: "rgba(139,26,26,0.06)" }}
               >
                 <Icon
-                  size={18}
+                  size={20}
                   style={{ color: "#8b1a1a" }}
                   strokeWidth={1.6}
                 />
               </div>
               <p
-                className="font-semibold text-sm mb-2"
+                className="font-semibold text-base mb-3"
                 style={{ color: "#1a1410" }}
               >
                 — {title}
               </p>
               <p
-                className="text-xs leading-relaxed"
+                className="text-sm leading-relaxed"
                 style={{ color: "#8a7060" }}
               >
                 {desc}
@@ -567,7 +647,9 @@ const Leadership = () => (
   <section className="py-12 md:py-16" style={{ background: "#ffffff" }}>
     <div className="container-site">
       <FadeIn className="text-center mb-8">
-        <SectionLabel>Leadership</SectionLabel>
+        <div className="flex justify-center">
+          <SectionLabel>Leadership</SectionLabel>
+        </div>
         <h2
           className="font-serif font-bold"
           style={{
@@ -630,12 +712,16 @@ const Leadership = () => (
 );
 
 // ─── 8. Certifications ────────────────────────────────────────────────────────
+
 const Certifications = () => (
   <section className="py-10 md:py-12" style={{ background: "#f5f2ee" }}>
     <div className="container-site">
-      <div className="flex flex-col md:flex-row md:items-center gap-6 md:gap-10">
-        <FadeIn className="shrink-0">
-          <SectionLabel>Trusted &amp; Certified</SectionLabel>
+      {/* Changed to flex-col, items-center, and text-center for perfect centering */}
+      <div className="flex flex-col items-center text-center gap-6 md:gap-8">
+        <FadeIn className="shrink-0 flex flex-col items-center">
+          <div className="flex justify-center mb-3">
+            <SectionLabel>Trusted &amp; Certified</SectionLabel>
+          </div>
           <h2
             className="font-serif font-bold leading-tight"
             style={{
@@ -645,27 +731,27 @@ const Certifications = () => (
             }}
           >
             Our Certifications
-            <br />
+            <br className="hidden sm:block" />
             &amp; Recognitions
           </h2>
         </FadeIn>
 
+        {/* Removed ml-auto and added justify-center for normal responsive wrapping */}
         <FadeIn
           delay={0.1}
-          className="flex flex-wrap items-center gap-4 md:gap-6"
+          className="flex flex-wrap justify-center items-center gap-4 md:gap-6"
         >
           {[
-            { label: "ISO 9001:2015 Certified", badge: "ISO" },
             { label: "CE Certified", badge: "CE" },
             { label: "IEC Registered Exporter", badge: "IEC" },
           ].map(({ label, badge }) => (
             <div
               key={badge}
-              className="flex flex-col items-center gap-1.5 px-5 py-4 rounded-xl border text-center"
+              className="flex flex-col items-center justify-center gap-1.5 px-6 py-4 rounded-xl border text-center"
               style={{
                 background: "#ffffff",
                 borderColor: "rgba(60,40,20,0.08)",
-                minWidth: "90px",
+                minWidth: "110px",
               }}
             >
               <span className="font-bold text-xl" style={{ color: "#1a1410" }}>
@@ -682,7 +768,7 @@ const Certifications = () => (
 
           <Link
             to="/certifications"
-            className="ml-auto inline-flex items-center justify-center px-5 py-3 text-xs font-semibold uppercase tracking-wider rounded-lg transition-colors duration-200"
+            className="inline-flex items-center justify-center px-6 py-3.5 text-xs font-semibold uppercase tracking-wider rounded-lg transition-colors duration-200"
             style={{ background: "#7a1b1a", color: "#fffaf7" }}
           >
             View All Certifications
@@ -693,7 +779,6 @@ const Certifications = () => (
   </section>
 );
 
-// ─── Page export ──────────────────────────────────────────────────────────────
 export default function AboutPage() {
   return (
     <main>

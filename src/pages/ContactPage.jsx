@@ -286,16 +286,6 @@ export default function ContactPage() {
             <FadeIn>
               <div className="flex items-center gap-2 mb-3">
                 <div className="w-4 h-px" style={{ background: "#8b1a1a" }} />
-                <p
-                  className="uppercase font-semibold"
-                  style={{
-                    fontSize: "10px",
-                    letterSpacing: "0.2em",
-                    color: "#8b1a1a",
-                  }}
-                >
-                  Reach Out
-                </p>
               </div>
             </FadeIn>
 

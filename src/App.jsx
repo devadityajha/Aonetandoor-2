@@ -11,6 +11,7 @@ import CertificationsPage from "./pages/CertificationsPage";
 import ContactPage from "./pages/ContactPage";
 import PageTransition from "./components/ui/PageTransition";
 import ScrollToTop from "./components/ScrollToTop";
+import WhatsAppButton from "./components/WhatsAppButton";
 
 export default function App() {
   useLenis();
@@ -73,6 +74,7 @@ export default function App() {
         </Routes>
       </AnimatePresence>
       <Footer />
+      <WhatsAppButton />
     </>
   );
 }

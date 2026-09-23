@@ -468,6 +468,86 @@ export default function ProductDetailPage() {
         </div>
       </div>
 
+      {/* /////////////// idhar new section add ho raha hai */}
+
+      {/* ── AVAILABLE MODELS ───────────────────────── */}
+      {product.sizeTable?.length > 0 && (
+        <div className="bg-white border-t border-clay-200">
+          <div className="container-site py-12 md:py-16">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
+              <div>
+                <p className="section-label mb-3">All Variants</p>
+
+                <h2 className="section-heading pb-2">
+                  Available <em className="text-brand not-italic">Models</em>
+                </h2>
+              </div>
+              <p className="text-xs text-charcoal-soft/70 md:text-right md:max-w-[30ch]">
+                Custom sizes available on request.
+              </p>
+            </div>
+
+            {/* Desktop — table */}
+            <div className="overflow-x-auto">
+              <table className="w-full border-collapse min-w-[560px]">
+                <thead>
+                  <tr className="border-b border-clay-300">
+                    {[
+                      "Model No.",
+                      "Length",
+                      "Height",
+                      "Width",
+                      "Weight",
+                      "Mouth Dia.",
+                    ].map((h) => (
+                      <th
+                        key={h}
+                        className="text-left py-4 px-4 text-[10px] text-charcoal-soft uppercase font-medium"
+                        style={{ letterSpacing: "0.2em" }}
+                      >
+                        {h}
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {product.sizeTable.map((v, i) => (
+                    <motion.tr
+                      key={i}
+                      initial={{ opacity: 0, y: 8 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: i * 0.05, duration: 0.4 }}
+                      className="border-b border-clay-100 hover:bg-clay-50 transition-colors"
+                    >
+                      <td className="py-4 px-4 font-display text-base font-semibold text-charcoal">
+                        {v.modelNo || "—"}
+                      </td>
+                      {[
+                        v.length,
+                        v.height,
+                        v.width,
+                        v.weight,
+                        v.mouthDiameter,
+                      ].map((val, j) => (
+                        <td
+                          key={j}
+                          className="py-4 px-4 text-sm text-charcoal-soft"
+                        >
+                          {val || "—"}
+                        </td>
+                      ))}
+                    </motion.tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            {/* Mobile — cards */}
+          </div>
+        </div>
+      )}
+
       {/* ── RELATED PRODUCTS ───────────────────────── */}
       {related.length > 0 && (
         <div className="bg-clay-50 py-4 md:py-4">
@@ -607,53 +687,55 @@ function SizePanel({ product }) {
         </span>
       </div>
 
-      {/* Model cards — more premium than a raw table */}
-      <div className="flex flex-col gap-4">
-        {sizes.map((v, i) => (
-          <motion.div
-            key={i}
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: i * 0.07, duration: 0.45 }}
-            className="group bg-white border border-clay-200 hover:border-brand/40 hover:shadow-lg hover:shadow-brand/5 transition-all duration-400 overflow-hidden"
-          >
-            {/* Model header */}
-            <div className="flex items-center justify-between px-6 py-4 border-b border-clay-100 group-hover:border-brand/20 transition-colors">
-              <span className="font-display text-lg text-charcoal font-semibold">
-                {v.modelNo}
-              </span>
-              <span
-                className="text-[9px] text-brand uppercase font-medium"
-                style={{ letterSpacing: "0.25em" }}
-              >
-                Model
-              </span>
-            </div>
-
-            {/* Specs grid */}
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-0 divide-x divide-y divide-clay-100">
+      {/* Table */}
+      <div className="overflow-x-auto border border-clay-200 bg-white">
+        <table className="w-full border-collapse min-w-[520px]">
+          <thead>
+            <tr className="bg-clay-50 border-b border-clay-200">
               {[
-                ["Length", v.length],
-                ["Height", v.height],
-                ["Width", v.width],
-                ["Weight", v.weight],
-                ["Mouth Dia.", v.mouthDiameter],
-              ].map(([label, value]) =>
-                value ? (
-                  <div key={label} className="px-5 py-4">
-                    <p
-                      className="text-[9px] text-charcoal-soft uppercase mb-1"
-                      style={{ letterSpacing: "0.2em" }}
+                "Model",
+                "Length",
+                "Height",
+                "Width",
+                "Weight",
+                "Mouth Dia.",
+              ].map((h) => (
+                <th
+                  key={h}
+                  className="text-left py-3.5 px-4 text-[9px] text-charcoal-soft uppercase font-medium whitespace-nowrap"
+                  style={{ letterSpacing: "0.18em" }}
+                >
+                  {h}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {sizes.map((v, i) => (
+              <motion.tr
+                key={i}
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.05, duration: 0.35 }}
+                className="border-b border-clay-100 last:border-0 hover:bg-clay-50/60 transition-colors"
+              >
+                <td className="py-3.5 px-4 font-display text-sm font-semibold text-charcoal whitespace-nowrap">
+                  {v.modelNo || "—"}
+                </td>
+                {[v.length, v.height, v.width, v.weight, v.mouthDiameter].map(
+                  (val, j) => (
+                    <td
+                      key={j}
+                      className="py-3.5 px-4 text-sm text-charcoal-soft whitespace-nowrap"
                     >
-                      {label}
-                    </p>
-                    <p className="text-sm font-medium text-charcoal">{value}</p>
-                  </div>
-                ) : null,
-              )}
-            </div>
-          </motion.div>
-        ))}
+                      {val || "—"}
+                    </td>
+                  ),
+                )}
+              </motion.tr>
+            ))}
+          </tbody>
+        </table>
       </div>
 
       {/* Note */}

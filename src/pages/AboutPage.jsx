@@ -205,31 +205,31 @@ const OurStory = () => (
 const FACILITY = [
   {
     img: "/advancedMachinery.png",
-    icon: Settings,
+    icon: "/Advanced-Machinery.png",
     title: "Advanced Machinery",
     desc: "Modern equipment for precision engineering",
   },
   {
     img: "/skilled.png",
-    icon: Users,
+    icon: "/Skilled-Craftmanship.png",
     title: "Skilled Craftsmen",
     desc: "Experienced team with generational expertise",
   },
   {
     img: "/quality.png",
-    icon: Shield,
+    icon: "/Quality-Inspection.png",
     title: "Quality Inspection",
     desc: "Rigorous testing at every stage of production",
   },
   {
     img: "/export.png",
-    icon: Box,
+    icon: "/export-packaging.png",
     title: "Export Packaging",
     desc: "Secure packaging for safe international delivery",
   },
   {
     img: "/custom.png",
-    icon: Wrench,
+    icon: "/Custom-Manufacturing.png",
     title: "Custom Manufacturing",
     desc: "Tailor-made solutions as per client requirements",
   },
@@ -257,7 +257,7 @@ const ManufacturingSection = () => (
       </FadeIn>
 
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-4">
-        {FACILITY.map(({ img, icon: Icon, title, desc }, i) => (
+        {FACILITY.map(({ img, icon, title, desc }, i) => (
           <FadeIn key={title} delay={i * 0.06}>
             <div
               className="group rounded-xl overflow-hidden border"
@@ -276,10 +276,11 @@ const ManufacturingSection = () => (
               </div>
               <div className="p-3">
                 <div className="flex items-center gap-2 mb-1">
-                  <Icon
-                    size={14}
-                    style={{ color: "#8b1a1a" }}
-                    strokeWidth={1.8}
+                  <img
+                    src={icon}
+                    alt=""
+                    className="w-6 h-6 object-contain shrink-0"
+                    loading="lazy"
                   />
                   <p
                     className="font-semibold text-xs"
@@ -304,94 +305,28 @@ const ManufacturingSection = () => (
 );
 
 // ─── 4. Expertise ────────────────────────────────────────────────────────────
-
 const EXPERTISE = [
   {
-    icon: ChefHat,
+    image: "Tandoors-clay-Products.png",
     title: "Tandoors & Clay Products",
     desc: "Traditional and modern tandoors built for commercial and residential use.",
   },
   {
-    icon: Settings,
+    image: "CommercialKitchenEquipment.png",
     title: "Commercial Kitchen Equipment",
     desc: "Complete range of equipment for restaurants and food businesses.",
   },
   {
-    icon: Wrench,
+    image: "CateringEquipment.png",
     title: "Catering Equipment",
     desc: "Heavy-duty equipment designed for catering and large-scale operations.",
   },
   {
-    icon: Box,
+    image: "CustomManufacturing.png",
     title: "Custom Manufacturing",
     desc: "We build equipment as per your exact specifications and project needs.",
   },
 ];
-
-// const ExpertiseSection = () => (
-//   <section className="py-12 md:py-16" style={{ background: "#f5f2ee" }}>
-//     <div className="container-site">
-//       <div className="grid lg:grid-cols-[1fr_2fr] gap-8 md:gap-12 items-start">
-//         <FadeIn>
-//           <SectionLabel>Our Expertise</SectionLabel>
-//           <h2
-//             className="font-serif font-bold leading-tight"
-//             style={{
-//               color: "#1a1410",
-//               fontSize: "clamp(1.8rem,3vw,2.8rem)",
-//               letterSpacing: "-0.02em",
-//             }}
-//           >
-//             Manufacturing Solutions For{" "}
-//             <span style={{ color: "#8b1a1a" }}>Every Kitchen</span>
-//           </h2>
-//           <p
-//             className="mt-4 text-sm leading-relaxed"
-//             style={{ color: "#5c4a3a" }}
-//           >
-//             From clay tandoors to commercial kitchen equipment, we offer a wide
-//             range of solutions for all types of food businesses.
-//           </p>
-//         </FadeIn>
-
-//         <div className="grid grid-cols-2 gap-3 md:gap-4">
-//           {EXPERTISE.map(({ icon: Icon, title, desc }, i) => (
-//             <FadeIn key={title} delay={i * 0.07}>
-//               <div
-//                 className="h-full rounded-xl p-4 md:p-5 border"
-//                 style={{
-//                   background: "#ffffff",
-//                   borderColor: "rgba(60,40,20,0.07)",
-//                   boxShadow: "0 1px 4px rgba(60,40,20,0.05)",
-//                 }}
-//               >
-//                 <Icon
-//                   size={26}
-//                   style={{ color: "#8b1a1a" }}
-//                   strokeWidth={1.4}
-//                 />
-//                 <p
-//                   className="mt-3 font-semibold text-sm leading-snug"
-//                   style={{ color: "#1a1410" }}
-//                 >
-//                   {title}
-//                 </p>
-//                 <p
-//                   className="mt-2 text-[12px] leading-relaxed"
-//                   style={{ color: "#8a7060" }}
-//                 >
-//                   {desc}
-//                 </p>
-//               </div>
-//             </FadeIn>
-//           ))}
-//         </div>
-//       </div>
-//     </div>
-//   </section>
-// );
-
-// ─── 5. Why Choose Us ─────────────────────────────────────────────────────────
 
 const ExpertiseSection = () => (
   <section className="py-12 md:py-16" style={{ background: "#f5f2ee" }}>
@@ -420,14 +355,8 @@ const ExpertiseSection = () => (
           </p>
         </FadeIn>
 
-        {/*
-          CHANGED: Responsive horizontal line
-          Mobile: 1 column
-          Tablet: 2 columns
-          Desktop: 4 columns (One single horizontal line)
-        */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
-          {EXPERTISE.map(({ icon: Icon, title, desc }, i) => (
+          {EXPERTISE.map(({ image, title, desc }, i) => (
             <FadeIn key={title} delay={i * 0.07}>
               <div
                 className="h-full w-full rounded-xl p-5 md:p-6 border"
@@ -437,10 +366,11 @@ const ExpertiseSection = () => (
                   boxShadow: "0 1px 4px rgba(60,40,20,0.05)",
                 }}
               >
-                <Icon
-                  size={28}
-                  style={{ color: "#8b1a1a" }}
-                  strokeWidth={1.4}
+                <img
+                  src={image}
+                  alt={title}
+                  className="w-16 h-16 object-contain"
+                  loading="lazy"
                 />
                 <p
                   className="mt-4 font-semibold text-sm md:text-base leading-snug"
@@ -463,24 +393,25 @@ const ExpertiseSection = () => (
   </section>
 );
 
+// ─── 5. Why Choose Us ─────────────────────────────────────────────────────────
 const WHY = [
   {
-    icon: Award,
+    image: "20yoe.png",
     title: "20+ Years Experience",
     desc: "Two decades of expertise in tandoor and kitchen equipment manufacturing.",
   },
   {
-    icon: Globe,
+    image: "exportReady.png",
     title: "Export Ready",
     desc: "Proudly serving customers in 30+ countries across the globe.",
   },
   {
-    icon: Settings,
+    image: "customSolution.png",
     title: "Custom Solutions",
     desc: "Tailor-made equipment built to match your exact requirements.",
   },
   {
-    icon: Shield,
+    image: "certifiedQuality.png",
     title: "Certified Quality",
     desc: "Manufactured to international standards with strict quality control.",
   },
@@ -507,7 +438,7 @@ const WhyChooseUs = () => (
 
       {/* 4 columns side-by-side on desktop to make the boxes narrow and tall */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-        {WHY.map(({ icon: Icon, title, desc }, i) => (
+        {WHY.map(({ image, title, desc }, i) => (
           <FadeIn key={title} delay={i * 0.07}>
             <div
               className="h-full rounded-xl p-6 md:p-8 border flex flex-col"
@@ -521,10 +452,11 @@ const WhyChooseUs = () => (
                 className="w-12 h-12 rounded-full flex items-center justify-center mb-5 shrink-0"
                 style={{ background: "rgba(139,26,26,0.06)" }}
               >
-                <Icon
-                  size={20}
-                  style={{ color: "#8b1a1a" }}
-                  strokeWidth={1.6}
+                <img
+                  src={image}
+                  alt={title}
+                  className="w-16 h-16 object-contain"
+                  loading="lazy"
                 />
               </div>
               <p
